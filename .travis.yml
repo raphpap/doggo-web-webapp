@@ -1,0 +1,26 @@
+---
+language: node_js
+node_js:
+  - 8.11.2
+
+git:
+  submodules: false
+
+dist: trusty
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+
+script:
+  - ./scripts/enforce_prettier.sh
+  - npm run test -- --bail --maxWorkers=4 --coverage
+  - npm run build
+
+notifications:
+  email:
+    on_success: 'change'
+    on_failure: 'change'
