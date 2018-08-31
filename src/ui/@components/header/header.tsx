@@ -29,7 +29,7 @@ export class Header extends Component {
   public render() {
     return (
       <StyledHeader>
-        <Title>this.props.children</Title>
+        <Title>Doggo</Title>
       </StyledHeader>
     );
   }
