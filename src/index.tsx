@@ -14,9 +14,15 @@ import registerServiceWorker from './registerServiceWorker';
 // Styles
 import './index.css';
 
+// Context
+import {ApplicationContextProvider} from 'doggo-web-webapp/ui/@context';
+
 ReactDOM.render(
-  <Router>
-    <Application />
-  </Router>,
-  document.getElementById('root'));
+  <ApplicationContextProvider>
+    <Router>
+      <Application />
+    </Router>
+  </ApplicationContextProvider>,
+  document.getElementById('root')
+);
 registerServiceWorker();

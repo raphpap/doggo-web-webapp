@@ -1,13 +1,41 @@
 // Vendor
 import React from 'react';
 import styled from 'react-emotion';
+import {compose} from 'recompose';
 
+// Context
+import {
+  withApplicationContext,
+  WithApplicationContextProps
+} from 'doggo-web-webapp/ui/@context';
+
+// Elements
 const Message = styled.p`
   color: rgba(255, 255, 255, 0.8);
 `;
 
-export const Team: React.SFC = () => (
-  <Message>Team</Message>
-);
+// Types
+interface Props {}
+type EnhancedProps = Props & WithApplicationContextProps;
 
-export default Team;
+const enhance = compose<EnhancedProps, Props>(withApplicationContext);
+
+export const Team: React.SFC<EnhancedProps> = ({context}) => {
+  const {state} = context;
+  const {cards} = state;
+
+  if (!cards) {
+    return <Message>Loading...</Message>;
+  }
+
+  return (
+    <>
+      <Message>Team</Message>
+      {cards.map(({name}) => (
+        <Message>{name}</Message>
+      ))}
+    </>
+  );
+};
+
+export default enhance(Team);

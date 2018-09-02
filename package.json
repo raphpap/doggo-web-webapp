@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "emotion": "^9.2.3",
-    "react-emotion": "^9.2.3",
     "@mirego/react-scripts": "0.2.0-beta.3",
+    "emotion": "^9.2.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-emotion": "^9.2.3",
     "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "recompose": "^0.27.1"
   },
   "scripts": {
     "start": "mirego-react-scripts start",
@@ -25,6 +26,7 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-router": "^4.0.26",
     "@types/react-router-dom": "^4.2.7",
+    "@types/recompose": "^0.26.1",
     "prettier": "^1.14.0",
     "stylelint": "8.4.0",
     "stylelint-config-mirego": "^1.0.0",
