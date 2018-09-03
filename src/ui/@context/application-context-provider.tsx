@@ -4,6 +4,12 @@ import React from 'react';
 // Components
 import {Provider} from './context';
 
+// Services
+import DoggoAPI, {
+  ApiError,
+  LoginResultData
+} from 'doggo-web-webapp/services/doggo-api';
+
 // Types
 import {ContextState} from './types';
 
@@ -11,7 +17,30 @@ type State = Readonly<ContextState>;
 
 // Constants
 const INITIAL_STATE: State = {
-  cards: null
+  cards: null,
+  error: null,
+  loading: false
+};
+
+const handleLoginPending = () => ({
+  error: null,
+  loading: true
+});
+
+const handleLoginFailure = (error: ApiError) => ({
+  error,
+  loading: false
+});
+
+const handleLoginSuccess = ({cards, username}: LoginResultData) => (
+  state: ContextState
+) => {
+  return {
+    ...state,
+    cards,
+    loading: false,
+    username
+  };
 };
 
 export class ApplicationContextProvider extends React.Component<{}, State> {
@@ -32,20 +61,15 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
     );
   }
 
-  private login = async () => {
-    setTimeout(() => {
-      this.setState({
-        cards: [
-          {
-            hp: 50,
-            name: 'Card 1'
-          },
-          {
-            hp: 100,
-            name: 'Card 2'
-          }
-        ]
-      });
-    }, 1000);
+  private login = async (username: string, password: string) => {
+    this.setState(handleLoginPending());
+
+    const {data, error} = await DoggoAPI.login(username, password);
+
+    if (error) {
+      this.setState(handleLoginFailure(error));
+    } else {
+      this.setState(handleLoginSuccess(data!));
+    }
   };
 }

@@ -30,7 +30,7 @@ const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 // Interfaces
 export class Application extends Component<EnhancedProps> {
   public componentDidMount() {
-    this.props.context.actions.login();
+    this.props.context.actions.login('username', 'password');
   }
 
   public render() {

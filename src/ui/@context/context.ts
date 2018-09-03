@@ -6,10 +6,12 @@ import {ApplicationContext} from './types';
 
 const defaultValue: ApplicationContext = {
   actions: {
-    login: () => Promise.reject()
+    login: (username: string, password: string) => Promise.reject()
   },
   state: {
-    cards: null
+    cards: null,
+    error: null,
+    loading: false
   }
 };
 
