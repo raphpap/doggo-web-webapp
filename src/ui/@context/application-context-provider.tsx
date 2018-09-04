@@ -7,6 +7,7 @@ import {Provider} from './context';
 // Services
 import DoggoAPI, {
   ApiError,
+  CaptureResultData,
   LoginResultData
 } from 'doggo-web-webapp/services/doggo-api';
 
@@ -22,12 +23,12 @@ const INITIAL_STATE: State = {
   loading: false
 };
 
-const handleLoginPending = () => ({
+const handleCallPending = () => ({
   error: null,
   loading: true
 });
 
-const handleLoginFailure = (error: ApiError) => ({
+const handleCallFailure = (error: ApiError) => ({
   error,
   loading: false
 });
@@ -43,6 +44,18 @@ const handleLoginSuccess = ({cards, username}: LoginResultData) => (
   };
 };
 
+const handleCaptureSuccess = ({card}: CaptureResultData) => (
+  state: ContextState
+) => {
+  if (!state.cards) throw Error(`Team was not found! Cannot capture a new doggo for now.`);
+
+  return {
+    ...state,
+    cards: state.cards.concat([card]),
+    loading: false
+  };
+};
+
 export class ApplicationContextProvider extends React.Component<{}, State> {
   public readonly state: State = INITIAL_STATE;
 
@@ -51,6 +64,7 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
       <Provider
         value={{
           actions: {
+            capture: this.capture,
             login: this.login
           },
           state: {...this.state}
@@ -62,14 +76,26 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
   }
 
   private login = async (username: string, password: string) => {
-    this.setState(handleLoginPending());
+    this.setState(handleCallPending());
 
     const {data, error} = await DoggoAPI.login(username, password);
 
     if (error) {
-      this.setState(handleLoginFailure(error));
+      this.setState(handleCallFailure(error));
     } else {
       this.setState(handleLoginSuccess(data!));
+    }
+  };
+
+  private capture = async (name: string) => {
+    this.setState(handleCallPending());
+
+    const {data, error} = await DoggoAPI.capture(name);
+
+    if (error) {
+      this.setState(handleCallFailure(error));
+    } else {
+      this.setState(handleCaptureSuccess(data!));
     }
   };
 }

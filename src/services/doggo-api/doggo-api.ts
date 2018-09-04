@@ -37,6 +37,14 @@ export interface LoginResultData {
   username: string;
 }
 
+export interface CaptureResult extends ApiResult {
+  data?: CaptureResultData;
+}
+
+export interface CaptureResultData {
+  card: Card;
+}
+
 export interface Card {
   name: string;
   hp: number;
@@ -45,6 +53,10 @@ export interface Card {
 export class DoggoAPI {
   public login = (username: string, password: string): Promise<LoginResult> => {
     return this.post('/login', {password, username});
+  };
+
+  public capture = (name: string): Promise<CaptureResult> => {
+    return this.post('/capture', {name});
   };
 
   private post(

@@ -2,6 +2,7 @@
 import fetchMock from 'fetch-mock';
 
 // Mocks
+import {mockCapture} from './mock-capture';
 import {mockLogin} from './mock-login';
 
 // Configs
@@ -21,5 +22,18 @@ fetchMock.mock({
     const {username, password} = JSON.parse(body as string);
     await sleep(1500);
     return mockLogin(username, password);
+  }
+});
+
+
+fetchMock.mock({
+  headers: {'X-API-Key': API_KEY},
+  matcher: `${API_URL}/capture`,
+  method: 'POST',
+  response: async (_url: string, opts: RequestInit) => {
+    const {body} = opts;
+    const {name} = JSON.parse(body as string);
+    await sleep(1500);
+    return mockCapture(name);
   }
 });

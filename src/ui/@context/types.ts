@@ -7,6 +7,7 @@ export interface ApplicationContext {
 
 export interface ContextActions {
   login: (username: string, password: string) => void;
+  capture: (name: string) => void;
 }
 
 export interface ContextState {
