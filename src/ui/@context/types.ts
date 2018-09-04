@@ -7,7 +7,7 @@ export interface ApplicationContext {
 
 export interface ContextActions {
   login: (username: string, password: string) => void;
-  capture: (name: string) => void;
+  capture: (card: {name: string; image: string}) => void;
 }
 
 export interface ContextState {
@@ -18,5 +18,6 @@ export interface ContextState {
 
 export interface Card {
   name: string;
+  image: string;
   hp: number;
 }

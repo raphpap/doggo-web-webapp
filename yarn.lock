@@ -1420,6 +1420,12 @@
     "@types/history" "*"
     "@types/react" "*"
 
+"@types/react-webcam@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@types/react-webcam/-/react-webcam-0.3.1.tgz#0d04b26fcb780c93d5914c1f645a66fecb57f9d5"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.4.7":
   version "16.4.7"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.7.tgz#f33f6d759a7e1833befa15224d68942d178a5a3f"
@@ -6923,7 +6929,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.6.0, prop-types@^15.6.1:
+prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -7105,6 +7111,12 @@ react-router@^4.3.1:
     path-to-regexp "^1.7.0"
     prop-types "^15.6.1"
     warning "^4.0.1"
+
+react-webcam@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-webcam/-/react-webcam-1.0.1.tgz#2e6b7d1ee8221f480f0f4c30a5282f864f0edbfa"
+  dependencies:
+    prop-types "^15.5.8"
 
 react@^16.4.2:
   version "16.4.2"

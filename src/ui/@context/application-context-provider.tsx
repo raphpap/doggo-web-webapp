@@ -47,7 +47,9 @@ const handleLoginSuccess = ({cards, username}: LoginResultData) => (
 const handleCaptureSuccess = ({card}: CaptureResultData) => (
   state: ContextState
 ) => {
-  if (!state.cards) throw Error(`Team was not found! Cannot capture a new doggo for now.`);
+  if (!state.cards) {
+    throw Error(`Team was not found! Cannot capture a new doggo for now.`);
+  }
 
   return {
     ...state,
@@ -87,10 +89,10 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
     }
   };
 
-  private capture = async (name: string) => {
+  private capture = async (card: {name: string, image: string}) => {
     this.setState(handleCallPending());
 
-    const {data, error} = await DoggoAPI.capture(name);
+    const {data, error} = await DoggoAPI.capture(card);
 
     if (error) {
       this.setState(handleCallFailure(error));

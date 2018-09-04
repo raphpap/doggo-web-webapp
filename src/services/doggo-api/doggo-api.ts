@@ -47,6 +47,7 @@ export interface CaptureResultData {
 
 export interface Card {
   name: string;
+  image: string;
   hp: number;
 }
 
@@ -55,8 +56,8 @@ export class DoggoAPI {
     return this.post('/login', {password, username});
   };
 
-  public capture = (name: string): Promise<CaptureResult> => {
-    return this.post('/capture', {name});
+  public capture = (card: {name: string, image: string}): Promise<CaptureResult> => {
+    return this.post('/capture', {card});
   };
 
   private post(

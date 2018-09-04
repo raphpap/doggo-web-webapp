@@ -31,11 +31,15 @@ export const Team: React.SFC<EnhancedProps> = ({context}) => {
   return (
     <>
       <Message>Team</Message>
-      {cards.map(({name, hp}, index) => (
-        <Message key={index}>
-          {name} / {hp}
-          hp
-        </Message>
+      {cards.map(({name, hp, image}, index) => (
+        <div key={index}>
+          <Message>
+            {name} / {hp}
+            hp
+          </Message>
+
+          <img src={image} height={40} width={40} />
+        </div>
       ))}
     </>
   );

@@ -6,7 +6,7 @@ import {ApplicationContext} from './types';
 
 const defaultValue: ApplicationContext = {
   actions: {
-    capture: (name: string) => Promise.reject(),
+    capture: (card: {name: string; image: string}) => Promise.reject(),
     login: (username: string, password: string) => Promise.reject()
   },
   state: {
