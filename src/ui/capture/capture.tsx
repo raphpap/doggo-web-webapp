@@ -28,15 +28,33 @@ type EnhancedProps = Props & WithApplicationContextProps;
 
 const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 
-export class Capture extends React.Component<EnhancedProps> {
+interface State {
+  isWebcamActive: boolean;
+}
+
+export class Capture extends React.Component<EnhancedProps, State> {
+  public readonly state: State = {
+    isWebcamActive: false
+  };
+
   private webcam = React.createRef() as any;
+  private timer?: number;
+
+  public componentWillUnmount() {
+    window.clearTimeout(this.timer);
+  }
 
   public render() {
+    const {isWebcamActive} = this.state;
+
     return (
       <>
         <Message>Capture</Message>
-        <Webcam audio={false} ref={this.setRef} />
-        <Button onClick={this.onCaptureClicked}>Capture</Button>
+        <Webcam
+          audio={false}
+          onUserMedia={this.onWebcamActivated}
+          ref={this.setRef} />
+        <Button disabled={!isWebcamActive} onClick={this.onCaptureClicked}>Capture</Button>
       </>
     );
   }
@@ -44,6 +62,12 @@ export class Capture extends React.Component<EnhancedProps> {
   private setRef = (webcam: any) => {
     this.webcam = webcam;
   };
+
+  private onWebcamActivated = () => {
+    this.timer = window.setTimeout(() => {
+      this.setState({isWebcamActive: true});
+    }, 3000);
+  }
 
   private onCaptureClicked = () => {
     const {context} = this.props;
