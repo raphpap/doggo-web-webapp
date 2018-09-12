@@ -56,7 +56,10 @@ export class DoggoAPI {
     return this.post('/login', {password, username});
   };
 
-  public capture = (card: {name: string, image: string}): Promise<CaptureResult> => {
+  public capture = (card: {
+    name: string;
+    image: string;
+  }): Promise<CaptureResult> => {
     return this.post('/capture', {card});
   };
 

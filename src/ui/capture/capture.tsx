@@ -53,8 +53,11 @@ export class Capture extends React.Component<EnhancedProps, State> {
         <Webcam
           audio={false}
           onUserMedia={this.onWebcamActivated}
-          ref={this.setRef} />
-        <Button disabled={!isWebcamActive} onClick={this.onCaptureClicked}>Capture</Button>
+          ref={this.setRef}
+        />
+        <Button disabled={!isWebcamActive} onClick={this.onCaptureClicked}>
+          Capture
+        </Button>
       </>
     );
   }
@@ -67,7 +70,7 @@ export class Capture extends React.Component<EnhancedProps, State> {
     this.timer = window.setTimeout(() => {
       this.setState({isWebcamActive: true});
     }, 3000);
-  }
+  };
 
   private onCaptureClicked = () => {
     const {context} = this.props;
