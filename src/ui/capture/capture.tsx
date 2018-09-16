@@ -51,6 +51,8 @@ export class Capture extends React.Component<EnhancedProps, State> {
       <>
         <Message>Capture</Message>
         <Webcam
+          width={340}
+          height={260}
           audio={false}
           onUserMedia={this.onWebcamActivated}
           ref={this.setRef}

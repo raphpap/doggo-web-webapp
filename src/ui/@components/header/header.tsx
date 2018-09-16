@@ -19,20 +19,13 @@ const StyledHeader = styled.header`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 120px;
+  height: 60px;
   background-color: #0e1111;
-
-  @media (max-width: 768px) {
-    height: 60px;
-  }
 `;
 
 const Title = styled.h1`
+  font-size: 16px;
   color: rgba(255, 255, 255, 0.8);
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
 `;
 
 export class Header extends Component {
