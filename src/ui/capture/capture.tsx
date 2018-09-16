@@ -22,6 +22,10 @@ const Button = styled.button`
   color: #000;
 `;
 
+const HiddenWebcamContainer = styled.div`
+  opacity: 0;
+`;
+
 // Types
 interface Props {}
 type EnhancedProps = Props & WithApplicationContextProps;
@@ -37,11 +41,14 @@ export class Capture extends React.Component<EnhancedProps, State> {
     isWebcamActive: false
   };
 
-  private webcam = React.createRef() as any;
-  private timer?: number;
+  private hiddenWebcam = React.createRef() as any;
+
+  private webcamTimer?: number;
+  private hiddenWebcamTimer?: number;
 
   public componentWillUnmount() {
-    window.clearTimeout(this.timer);
+    window.clearTimeout(this.webcamTimer);
+    window.clearTimeout(this.hiddenWebcamTimer);
   }
 
   public render() {
@@ -50,26 +57,30 @@ export class Capture extends React.Component<EnhancedProps, State> {
     return (
       <>
         <Message>Capture</Message>
-        <Webcam
-          width={340}
-          height={260}
-          audio={false}
-          onUserMedia={this.onWebcamActivated}
-          ref={this.setRef}
-        />
+        <Webcam width={340} height={260} audio={false} />
         <Button disabled={!isWebcamActive} onClick={this.onCaptureClicked}>
           Capture
         </Button>
+
+        <HiddenWebcamContainer>
+          <Webcam
+            width={680}
+            height={520}
+            audio={false}
+            onUserMedia={this.onHiddenWebcamActivated}
+            ref={this.setHiddenWebcamRef}
+          />
+        </HiddenWebcamContainer>
       </>
     );
   }
 
-  private setRef = (webcam: any) => {
-    this.webcam = webcam;
+  private setHiddenWebcamRef = (webcam: any) => {
+    this.hiddenWebcam = webcam;
   };
 
-  private onWebcamActivated = () => {
-    this.timer = window.setTimeout(() => {
+  private onHiddenWebcamActivated = () => {
+    this.hiddenWebcamTimer = window.setTimeout(() => {
       this.setState({isWebcamActive: true});
     }, 3000);
   };
@@ -79,7 +90,7 @@ export class Capture extends React.Component<EnhancedProps, State> {
     const {actions} = context;
     const {capture} = actions;
 
-    const imageSrc = this.webcam.getScreenshot() as string;
+    const imageSrc = this.hiddenWebcam.getScreenshot() as string;
 
     capture({
       image: imageSrc,
