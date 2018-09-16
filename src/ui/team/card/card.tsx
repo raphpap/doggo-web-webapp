@@ -34,8 +34,12 @@ const Info = styled.div`
   flex: 1 1 auto;
   flex-direction: column;
   justify-content: space-around;
-  padding-left: 24px;
+  padding: 8px 24px;
   color: rgba(255, 255, 255, 0.8);
+`;
+
+const Stats = styled.div`
+  color: rgba(255, 255, 255, 0.6);
 `;
 
 // Types
@@ -44,7 +48,7 @@ interface Props {
 }
 
 export const Card: React.SFC<Props> = ({card}) => {
-  const {name, hp, image} = card;
+  const {attack, defense, hp, name, image} = card;
 
   return (
     <CardContainer>
@@ -54,7 +58,7 @@ export const Card: React.SFC<Props> = ({card}) => {
 
       <Info>
         <div>{name}</div>
-        <div>{hp} hp</div>
+        <Stats>{hp}hp {attack}atk {defense}def</Stats>
       </Info>
     </CardContainer>
   );

@@ -11,6 +11,8 @@ export const mockCapture: (
   }
 ) => CaptureResultData = ({name, image}) => ({
   card: {
+    attack: generateRandomNumber(20, 100),
+    defense: generateRandomNumber(20, 100),
     hp: generateRandomNumber(20, 100),
     image,
     name

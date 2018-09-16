@@ -23,7 +23,9 @@ const Button = styled.button`
 `;
 
 const HiddenWebcamContainer = styled.div`
-  opacity: 0;
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
 `;
 
 // Types
