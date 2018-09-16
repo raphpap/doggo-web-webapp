@@ -89,7 +89,7 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
     }
   };
 
-  private capture = async (card: {name: string, image: string}) => {
+  private capture = async (card: {name: string; image: string}) => {
     this.setState(handleCallPending());
 
     const {data, error} = await DoggoAPI.capture(card);

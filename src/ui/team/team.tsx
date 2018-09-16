@@ -9,7 +9,16 @@ import {
   WithApplicationContextProps
 } from 'doggo-web-webapp/ui/@context';
 
+// Components
+import Card from './card';
+
 // Elements
+const CardsList = styled.ul`
+  min-width: 320px;
+  max-width: 800px;
+  padding: 0;
+`;
+
 const Message = styled.p`
   color: rgba(255, 255, 255, 0.8);
 `;
@@ -31,16 +40,11 @@ export const Team: React.SFC<EnhancedProps> = ({context}) => {
   return (
     <>
       <Message>Team</Message>
-      {cards.map(({name, hp, image}, index) => (
-        <div key={index}>
-          <Message>
-            {name} / {hp}
-            hp
-          </Message>
-
-          <img src={image} height={40} width={40} />
-        </div>
-      ))}
+      <CardsList>
+        {cards.map((card, index) => (
+          <Card key={index} card={card} />
+        ))}
+      </CardsList>
     </>
   );
 };

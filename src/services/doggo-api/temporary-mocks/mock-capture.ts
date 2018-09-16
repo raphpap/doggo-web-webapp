@@ -1,12 +1,17 @@
 // Types
 import {CaptureResultData} from '../doggo-api';
 
-export const mockCapture: (card: {
-  name: string;
-  image: string;
-}) => CaptureResultData = ({name, image}) => ({
+// Utilities
+import generateRandomNumber from 'doggo-web-webapp/utilities/generate-random-number';
+
+export const mockCapture: (
   card: {
-    hp: 99,
+    name: string;
+    image: string;
+  }
+) => CaptureResultData = ({name, image}) => ({
+  card: {
+    hp: generateRandomNumber(20, 100),
     image,
     name
   }
