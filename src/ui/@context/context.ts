@@ -12,7 +12,8 @@ const defaultValue: ApplicationContext = {
   state: {
     cards: null,
     error: null,
-    loading: false
+    loading: false,
+    nextOpponent: null
   }
 };
 

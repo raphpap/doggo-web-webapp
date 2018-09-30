@@ -35,6 +35,7 @@ export interface LoginResult extends ApiResult {
 export interface LoginResultData {
   cards: Card[];
   username: string;
+  nextOpponent: Card;
 }
 
 export interface CaptureResult extends ApiResult {

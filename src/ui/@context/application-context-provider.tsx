@@ -20,7 +20,8 @@ type State = Readonly<ContextState>;
 const INITIAL_STATE: State = {
   cards: null,
   error: null,
-  loading: false
+  loading: false,
+  nextOpponent: null
 };
 
 const handleCallPending = () => ({
@@ -33,13 +34,14 @@ const handleCallFailure = (error: ApiError) => ({
   loading: false
 });
 
-const handleLoginSuccess = ({cards, username}: LoginResultData) => (
+const handleLoginSuccess = ({cards, nextOpponent, username}: LoginResultData) => (
   state: ContextState
 ) => {
   return {
     ...state,
     cards,
     loading: false,
+    nextOpponent,
     username
   };
 };

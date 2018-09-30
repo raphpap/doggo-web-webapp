@@ -11,6 +11,7 @@ import {RouteComponentProps, withRouter} from 'react-router';
 
 // Context
 import {
+  Card,
   withApplicationContext,
   WithApplicationContextProps
 } from 'doggo-web-webapp/ui/@context';
@@ -18,9 +19,9 @@ import {
 // Utilities
 import findCard from 'doggo-web-webapp/utilities/find-card';
 
-// Components
-import BigCard from './big-card';
-import SmallCard from './small-card';
+// Shared Components
+import BigCard from 'doggo-web-webapp/ui/@components/big-card';
+import SmallCard from 'doggo-web-webapp/ui/@components/small-card';
 
 // Elements
 const CardsList = styled.ul`
@@ -73,7 +74,7 @@ export class Team extends React.Component<EnhancedProps> {
         <Message>Team</Message>
         <CardsList>
           {cards.map((card, index) => (
-            <SmallCard key={index} card={card} onCardClick={(cardId: string) => {this.openModal(cardId)}}/>
+            <SmallCard key={index} card={card} onCardClick={(card: Card) => {this.openModal(card.id)}}/>
           ))}
         </CardsList>
 

@@ -38,14 +38,14 @@ const Stats = styled.div`
 // Types
 interface Props {
   card: CardType;
-  onCardClick: (cardId: string) => void;
+  onCardClick: (card: CardType) => void;
 }
 
 export const SmallCard: React.SFC<Props> = ({card, onCardClick}) => {
   const {attack, defense, hp, name, image} = card;
 
   return (
-    <CardContainer onClick={() => {onCardClick(card.id)}}>
+    <CardContainer onClick={() => {onCardClick(card)}}>
       <Image src={image} />
 
       <Info>

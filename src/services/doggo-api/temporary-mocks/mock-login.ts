@@ -53,15 +53,15 @@ export const mockLogin = (
       id: '5',
       image: image_5,
       name: 'Tiny Tank'
-    },
-    {
-      attack: 100,
-      defense: 100,
-      hp: 100,
-      id: '6',
-      image: image_6,
-      name: 'Ronaldoggo'
     }
   ],
+  nextOpponent: {
+    attack: 10,
+    defense: 10,
+    hp: 10,
+    id: '99',
+    image: image_6,
+    name: 'Ronaldoggo'
+  },
   username
 });

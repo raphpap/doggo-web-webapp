@@ -14,6 +14,7 @@ export interface ContextState {
   cards: Card[] | null;
   error: ApiError | null;
   loading: boolean;
+  nextOpponent: Card | null;
 }
 
 export interface Card {
