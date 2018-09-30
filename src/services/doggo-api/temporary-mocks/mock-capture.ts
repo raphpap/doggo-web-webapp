@@ -14,6 +14,7 @@ export const mockCapture: (
     attack: generateRandomNumber(20, 100),
     defense: generateRandomNumber(20, 100),
     hp: generateRandomNumber(20, 100),
+    id: generateRandomNumber(1000, 100000).toString(),
     image,
     name
   }

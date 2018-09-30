@@ -9,16 +9,16 @@ import {Card as CardType} from 'doggo-web-webapp/ui/@context';
 const CardContainer = styled.li`
   display: flex;
   justify-content: space-between;
-  height: 80px;
   width: 400px;
+  height: 80px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   margin: 8px;
 `;
 
 const Image = styled.img`
   display: block;
-  height: 100%;
   width: auto;
+  height: 100%;
 `;
 
 const Info = styled.div`
@@ -39,7 +39,7 @@ interface Props {
   card: CardType;
 }
 
-export const Card: React.SFC<Props> = ({card}) => {
+export const SmallCard: React.SFC<Props> = ({card}) => {
   const {attack, defense, hp, name, image} = card;
 
   return (
@@ -54,4 +54,4 @@ export const Card: React.SFC<Props> = ({card}) => {
   );
 };
 
-export default Card;
+export default SmallCard;

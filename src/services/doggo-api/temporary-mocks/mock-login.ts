@@ -18,6 +18,7 @@ export const mockLogin = (
       attack: 50,
       defense: 50,
       hp: 50,
+      id: '1',
       image: image_1,
       name: 'Pogger'
     },
@@ -25,6 +26,7 @@ export const mockLogin = (
       attack: 70,
       defense: 80,
       hp: 50,
+      id: '2',
       image: image_2,
       name: 'El Borko'
     },
@@ -32,6 +34,7 @@ export const mockLogin = (
       attack: 50,
       defense: 100,
       hp: 70,
+      id: '3',
       image: image_3,
       name: 'Blue Eyed White Pupper'
     },
@@ -39,6 +42,7 @@ export const mockLogin = (
       attack: 80,
       defense: 80,
       hp: 80,
+      id: '4',
       image: image_4,
       name: 'King Karl'
     },
@@ -46,6 +50,7 @@ export const mockLogin = (
       attack: 70,
       defense: 100,
       hp: 60,
+      id: '5',
       image: image_5,
       name: 'Tiny Tank'
     },
@@ -53,6 +58,7 @@ export const mockLogin = (
       attack: 100,
       defense: 100,
       hp: 100,
+      id: '6',
       image: image_6,
       name: 'Ronaldoggo'
     }

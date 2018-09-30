@@ -46,6 +46,7 @@ export interface CaptureResultData {
 }
 
 export interface Card {
+  id: string;
   name: string;
   image: string;
   hp: number;

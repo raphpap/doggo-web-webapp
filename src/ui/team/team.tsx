@@ -9,8 +9,11 @@ import {
   WithApplicationContextProps
 } from 'doggo-web-webapp/ui/@context';
 
+// Utilities
+import findCard from 'doggo-web-webapp/utilities/find-card';
+
 // Components
-import Card from './card';
+import SmallCard from './small-card';
 
 // Elements
 const CardsList = styled.ul`
@@ -24,12 +27,14 @@ const Message = styled.p`
 `;
 
 // Types
-interface Props {}
+interface Props {
+  cardId?: string;
+}
 type EnhancedProps = Props & WithApplicationContextProps;
 
 const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 
-export const Team: React.SFC<EnhancedProps> = ({context}) => {
+export const Team: React.SFC<EnhancedProps> = ({cardId, context}) => {
   const {state} = context;
   const {cards} = state;
 
@@ -37,12 +42,14 @@ export const Team: React.SFC<EnhancedProps> = ({context}) => {
     return <Message>Loading...</Message>;
   }
 
+  const selectedCard = cardId ? findCard(cardId, cards) : null;
+
   return (
     <>
       <Message>Team</Message>
       <CardsList>
         {cards.map((card, index) => (
-          <Card key={index} card={card} />
+          <SmallCard key={index} card={card} />
         ))}
       </CardsList>
     </>

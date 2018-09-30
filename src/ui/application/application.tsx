@@ -40,7 +40,8 @@ export class Application extends Component<EnhancedProps> {
         <Content>
           <Switch>
             <Route path="/capture" component={Capture} />
-            <Route path="/team" component={Team} />
+            <Route path="/team/card/:cardId" render={({match}) => <Team cardId={match.params.cardId} />} />
+            <Route path="/team" render={() => <Team />} />
             <Route path="/battle" component={Battle} />
             <Route component={Capture} />
           </Switch>

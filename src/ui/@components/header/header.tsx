@@ -3,13 +3,23 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 
 // Vendor Components
-import {Link as ReactRouterLink} from 'react-router-dom';
+import {NavLink, withRouter} from 'react-router-dom';
+import {compose} from 'recompose';
+
+// Vendor Types
+import {RouteComponentProps} from 'react-router';
 
 // Elements
-const Link = styled(ReactRouterLink)`
+const Link = styled(NavLink)`
   text-decoration: none;
   color: #fff;
   user-select: none;
+  rgba(255, 255, 255, 0.7);
+
+  &.active {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+  }
 `;
 
 const StyledHeader = styled.header`
@@ -25,21 +35,29 @@ const StyledHeader = styled.header`
 
 const Title = styled.h1`
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.8);
+  color: inherit;
 `;
 
-export class Header extends Component {
+// Types
+interface Props {}
+
+type EnhancedProps = Props &
+  RouteComponentProps<never>;
+
+const enhance = compose<EnhancedProps, Props>(
+  withRouter
+);
+
+export class Header extends Component<EnhancedProps> {
   public render() {
     return (
       <StyledHeader>
-        <Link to="/team">Team</Link>
-        <Link to="/capture">
-          <Title>Doggo</Title>
-        </Link>
-        <Link to="/battle">Battle</Link>
+        <Link to="/team" activeClassName={'active'}><Title>Team</Title></Link>
+        <Link to="/capture" activeClassName={'active'}><Title>Capture</Title></Link>
+        <Link to="/battle" activeClassName={'active'}><Title>Battle</Title></Link>
       </StyledHeader>
     );
   }
 }
 
-export default Header;
+export default enhance(Header);
