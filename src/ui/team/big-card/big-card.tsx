@@ -6,20 +6,16 @@ import styled from 'react-emotion';
 import {Card as CardType} from 'doggo-web-webapp/ui/@context';
 
 // Elements
-const CardContainer = styled.li`
-  display: flex;
-  justify-content: space-between;
-  width: 400px;
-  height: 80px;
+const CardContainer = styled.div`
+  width: 300px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   margin: 8px;
-  cursor: pointer;
 `;
 
 const Image = styled.img`
   display: block;
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
 `;
 
 const Info = styled.div`
@@ -38,14 +34,13 @@ const Stats = styled.div`
 // Types
 interface Props {
   card: CardType;
-  onCardClick: (cardId: string) => void;
 }
 
-export const SmallCard: React.SFC<Props> = ({card, onCardClick}) => {
+export const BigCard: React.SFC<Props> = ({card}) => {
   const {attack, defense, hp, name, image} = card;
 
   return (
-    <CardContainer onClick={() => {onCardClick(card.id)}}>
+    <CardContainer>
       <Image src={image} />
 
       <Info>
@@ -56,4 +51,4 @@ export const SmallCard: React.SFC<Props> = ({card, onCardClick}) => {
   );
 };
 
-export default SmallCard;
+export default BigCard;

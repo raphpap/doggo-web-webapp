@@ -3,6 +3,12 @@ import React from 'react';
 import styled from 'react-emotion';
 import {compose} from 'recompose';
 
+// Vendor Components
+import Modal from 'react-responsive-modal';
+
+// Vendor Types
+import {RouteComponentProps, withRouter} from 'react-router';
+
 // Context
 import {
   withApplicationContext,
@@ -13,6 +19,7 @@ import {
 import findCard from 'doggo-web-webapp/utilities/find-card';
 
 // Components
+import BigCard from './big-card';
 import SmallCard from './small-card';
 
 // Elements
@@ -26,34 +33,64 @@ const Message = styled.p`
   color: rgba(255, 255, 255, 0.8);
 `;
 
+const ModalCss = {
+  closeIcon: {
+    fill: 'rgba(255, 255, 255, 0.8)'
+  },
+  modal: {
+    backgroundColor: '#171820',
+    paddingTop: '40px'
+  }
+};
+
 // Types
 interface Props {
   cardId?: string;
 }
-type EnhancedProps = Props & WithApplicationContextProps;
+type EnhancedProps = Props
+  & WithApplicationContextProps
+  & RouteComponentProps<never>;
 
-const enhance = compose<EnhancedProps, Props>(withApplicationContext);
+const enhance = compose<EnhancedProps, Props>(
+  withApplicationContext,
+  withRouter
+);
 
-export const Team: React.SFC<EnhancedProps> = ({cardId, context}) => {
-  const {state} = context;
-  const {cards} = state;
+export class Team extends React.Component<EnhancedProps> {
+  public render() {
+    const {cardId, context} = this.props;
+    const {state} = context;
+    const {cards} = state;
 
-  if (!cards) {
-    return <Message>Loading...</Message>;
+    if (!cards) {
+      return <Message>Loading...</Message>;
+    }
+
+    const selectedCard = cardId ? findCard(cardId, cards) : null;
+
+    return (
+      <>
+        <Message>Team</Message>
+        <CardsList>
+          {cards.map((card, index) => (
+            <SmallCard key={index} card={card} onCardClick={(cardId: string) => {this.openModal(cardId)}}/>
+          ))}
+        </CardsList>
+
+        <Modal open={!!selectedCard} onClose={() => {this.closeModal()}} styles={ModalCss} center>
+          {selectedCard && <BigCard card={selectedCard} />}
+        </Modal>
+      </>
+    );
   }
 
-  const selectedCard = cardId ? findCard(cardId, cards) : null;
+  private openModal = (cardId: string) => {
+    this.props.history.replace(`/team/card/${cardId}`)
+  }
 
-  return (
-    <>
-      <Message>Team</Message>
-      <CardsList>
-        {cards.map((card, index) => (
-          <SmallCard key={index} card={card} />
-        ))}
-      </CardsList>
-    </>
-  );
+  private closeModal = () => {
+    this.props.history.replace('/team');
+  }
 };
 
 export default enhance(Team);

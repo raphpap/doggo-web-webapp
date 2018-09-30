@@ -28,6 +28,13 @@ const HiddenWebcamContainer = styled.div`
   left: -9999px;
 `;
 
+// Constants
+const videoConstraints = {
+  facingMode: "environment",
+  height: 720,
+  width: 1280
+};
+
 // Types
 interface Props {}
 type EnhancedProps = Props & WithApplicationContextProps;
@@ -36,10 +43,12 @@ const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 
 interface State {
   isWebcamActive: boolean;
+  isHiddenWebcamActive: boolean;
 }
 
 export class Capture extends React.Component<EnhancedProps, State> {
   public readonly state: State = {
+    isHiddenWebcamActive: false,
     isWebcamActive: false
   };
 
@@ -54,21 +63,34 @@ export class Capture extends React.Component<EnhancedProps, State> {
   }
 
   public render() {
-    const {isWebcamActive} = this.state;
+    const {isHiddenWebcamActive, isWebcamActive} = this.state;
+    const disableCapture = !isHiddenWebcamActive || !isWebcamActive;
 
     return (
       <>
         <Message>Capture</Message>
-        <Webcam width={340} height={260} audio={false} />
-        <Button disabled={!isWebcamActive} onClick={this.onCaptureClicked}>
-          Capture
-        </Button>
+        <Webcam
+          /* width={340} */
+          /* height={260} */
+          width={680}
+          height={520}
+          audio={false}
+          /* videoConstraints={videoConstraints} */
+          onUserMedia={this.onWebcamActivated}
+        />
+
+        {!disableCapture && (
+          <Button onClick={this.onCaptureClicked}>
+            Capture
+          </Button>
+        )}
 
         <HiddenWebcamContainer>
           <Webcam
             width={680}
             height={520}
             audio={false}
+            /* videoConstraints={videoConstraints} */
             onUserMedia={this.onHiddenWebcamActivated}
             ref={this.setHiddenWebcamRef}
           />
@@ -81,9 +103,17 @@ export class Capture extends React.Component<EnhancedProps, State> {
     this.hiddenWebcam = webcam;
   };
 
-  private onHiddenWebcamActivated = () => {
-    this.hiddenWebcamTimer = window.setTimeout(() => {
+  private onWebcamActivated = () => {
+    this.webcamTimer = window.setTimeout(() => {
       this.setState({isWebcamActive: true});
+    }, 3000);
+  };
+
+  private onHiddenWebcamActivated = () => {
+    this.hiddenWebcam.getScreenshot();
+
+    this.hiddenWebcamTimer = window.setTimeout(() => {
+      this.setState({isHiddenWebcamActive: true});
     }, 3000);
   };
 

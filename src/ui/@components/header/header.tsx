@@ -13,12 +13,12 @@ import {RouteComponentProps} from 'react-router';
 const Link = styled(NavLink)`
   text-decoration: none;
   color: #fff;
+  color: rgba(255, 255, 255, 0.7);
   user-select: none;
-  rgba(255, 255, 255, 0.7);
 
   &.active {
-    color: #fff;
     border-bottom: 2px solid #fff;
+    color: #fff;
   }
 `;
 
