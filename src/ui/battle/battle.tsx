@@ -17,16 +17,19 @@ import {
 import BigCard from 'doggo-web-webapp/ui/@components/big-card';
 import SmallCard from 'doggo-web-webapp/ui/@components/small-card';
 
+// Components
+import CardSelection from './card-selection';
+
 // Elements
 const ActionContainer = styled.button`
   width: 160px;
   height: 160px;
   border: 2px solid #fff;
   border-radius: 50%;
+  margin: 60px 0;
   background-color: transparent;
   font-size: 16px;
   color: #fff;
-  margin: 40px 0;
 `;
 
 const CardContainer = styled.ul`
@@ -37,6 +40,17 @@ const CardContainer = styled.ul`
 
 const Message = styled.p`
   color: rgba(255, 255, 255, 0.8);
+`;
+
+const CardSelectionButton = styled.button`
+  width: 400px;
+  height: 80px;
+  border: 1px solid #fff;
+  margin-top: 16px;
+  background-color: transparent;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
 `;
 
 const ModalCss = {
@@ -56,6 +70,8 @@ type EnhancedProps = Props
   & WithApplicationContextProps;
 
 interface State {
+  selectedCard: Card | null,
+  showCardSelectionModal: boolean;
   showModalCard: Card | null;
 }
 
@@ -65,16 +81,18 @@ const enhance = compose<EnhancedProps, Props>(
 
 export class Battle extends React.Component<EnhancedProps, State> {
   public readonly state: State = {
+    selectedCard: null,
+    showCardSelectionModal: false,
     showModalCard: null
   }
 
   public render() {
-    const {showModalCard} = this.state;
+    const {selectedCard, showCardSelectionModal, showModalCard} = this.state;
     const {context} = this.props;
     const {state} = context;
-    const {nextOpponent} = state;
+    const {cards, nextOpponent} = state;
 
-    if (!nextOpponent) return <Message>Loading...</Message>;
+    if (!cards || !nextOpponent) return <Message>Loading...</Message>;
 
     return (
       <>
@@ -90,11 +108,42 @@ export class Battle extends React.Component<EnhancedProps, State> {
           </ActionContainer>
         </div>
 
+        {selectedCard ? (
+          <CardContainer>
+            <SmallCard card={selectedCard} onCardClick={(card: Card) => this.openCardModal(card)}/>
+          </CardContainer>
+        ) : (
+          <div>
+            <CardSelectionButton onClick={() => {this.openCardSelectionModal()}}>
+              Choose your fighter
+            </CardSelectionButton>
+          </div>
+        )}
+
+        <Modal open={showCardSelectionModal} onClose={() => {this.closeCardSelectionModal()}} styles={ModalCss} center>
+          <CardSelection cards={cards} onCardSelect={(card: Card) => {this.handleCardSelected(card)}}/>
+        </Modal>
+
         <Modal open={!!showModalCard} onClose={() => {this.closeCardModal()}} styles={ModalCss} center>
           {showModalCard && <BigCard card={showModalCard} />}
         </Modal>
       </>
     );
+  }
+
+  private handleCardSelected = (card: Card) => {
+    this.setState({
+      selectedCard: card,
+      showCardSelectionModal: false
+    });
+  }
+
+  private openCardSelectionModal = () => {
+    this.setState({showCardSelectionModal: true});
+  }
+
+  private closeCardSelectionModal = () => {
+    this.setState({showCardSelectionModal: false});
   }
 
   private openCardModal = (card: Card) => {
