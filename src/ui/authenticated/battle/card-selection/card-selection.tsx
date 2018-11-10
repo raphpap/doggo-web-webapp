@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'react-emotion';
 
 // Context
-import {Card} from 'doggo-web-webapp/ui/@context';
+import {Card} from 'doggo-web-webapp/context';
 
 // Shared Components
 import SmallCard from 'doggo-web-webapp/ui/@components/small-card';

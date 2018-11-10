@@ -14,7 +14,7 @@ import {
   Card,
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/ui/@context';
+} from 'doggo-web-webapp/context';
 
 // Utilities
 import findCard from 'doggo-web-webapp/utilities/find-card';

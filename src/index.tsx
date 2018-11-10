@@ -15,7 +15,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 // Context
-import {ApplicationContextProvider} from 'doggo-web-webapp/ui/@context';
+import {ApplicationContextProvider} from 'doggo-web-webapp/context';
 
 ReactDOM.render(
   <ApplicationContextProvider>

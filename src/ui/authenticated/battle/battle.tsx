@@ -11,7 +11,7 @@ import {
   Card,
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/ui/@context';
+} from 'doggo-web-webapp/context';
 
 // Shared Components
 import BigCard from 'doggo-web-webapp/ui/@components/big-card';

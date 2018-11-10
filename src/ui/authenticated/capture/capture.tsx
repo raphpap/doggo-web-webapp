@@ -8,7 +8,7 @@ import {compose} from 'recompose';
 import {
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/ui/@context';
+} from 'doggo-web-webapp/context';
 
 // Elements
 const Message = styled.p`
