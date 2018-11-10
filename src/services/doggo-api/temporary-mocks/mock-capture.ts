@@ -5,11 +5,9 @@ import {CaptureResultData} from '../doggo-api';
 import generateRandomNumber from 'doggo-web-webapp/utilities/generate-random-number';
 
 export const mockCapture: (
-  card: {
-    name: string;
-    image: string;
-  }
-) => CaptureResultData = ({name, image}) => ({
+  name: string,
+  image: string,
+) => CaptureResultData = (name, image) => ({
   card: {
     attack: generateRandomNumber(20, 100),
     defense: generateRandomNumber(20, 100),

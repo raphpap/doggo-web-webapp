@@ -7,14 +7,15 @@ export interface ApplicationContext {
 
 export interface ContextActions {
   login: (username: string, password: string) => void;
-  capture: (card: {name: string; image: string}) => void;
+  capture: (name: string, image: string) => void;
+  battle: (ownCard: Card, opponentCard: Card) => void;
 }
 
 export interface ContextState {
   cards: Card[] | null;
   error: ApiError | null;
   loading: boolean;
-  nextOpponent: Card | null;
+  opponent: Card | null;
 }
 
 export interface Card {

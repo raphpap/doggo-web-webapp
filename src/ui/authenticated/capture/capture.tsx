@@ -124,10 +124,10 @@ export class Capture extends React.Component<EnhancedProps, State> {
 
     const imageSrc = this.hiddenWebcam.getScreenshot() as string;
 
-    capture({
-      image: imageSrc,
-      name: 'New Card'
-    });
+    capture(
+      imageSrc,
+      'New Card'
+    );
   };
 }
 
