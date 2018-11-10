@@ -7,12 +7,13 @@ import {Provider} from './context';
 // Services
 import DoggoAPI, {
   ApiError,
+  BattleResultData,
   CaptureResultData,
   LoginResultData
 } from 'doggo-web-webapp/services/doggo-api';
 
 // Types
-import {ContextState} from './types';
+import {Card, ContextState} from './types';
 
 type State = Readonly<ContextState>;
 
@@ -21,7 +22,7 @@ const INITIAL_STATE: State = {
   cards: null,
   error: null,
   loading: false,
-  nextOpponent: null
+  opponent: null
 };
 
 const handleCallPending = () => ({
@@ -34,14 +35,14 @@ const handleCallFailure = (error: ApiError) => ({
   loading: false
 });
 
-const handleLoginSuccess = ({cards, nextOpponent, username}: LoginResultData) => (
+const handleLoginSuccess = ({cards, opponent, username}: LoginResultData) => (
   state: ContextState
 ) => {
   return {
     ...state,
     cards,
     loading: false,
-    nextOpponent,
+    opponent,
     username
   };
 };
@@ -60,6 +61,21 @@ const handleCaptureSuccess = ({card}: CaptureResultData) => (
   };
 };
 
+const handleBattleSuccess = ({card, opponent}: BattleResultData) => (
+  state: ContextState
+) => {
+  if (!state.cards) {
+    throw Error(`Team was not found! Cannot battle for now.`);
+  }
+
+  return {
+    ...state,
+    cards: state.cards.map(mappedCard => mappedCard.id === card.id ? card : mappedCard),
+    loading: false,
+    opponent
+  };
+};
+
 export class ApplicationContextProvider extends React.Component<{}, State> {
   public readonly state: State = INITIAL_STATE;
 
@@ -68,6 +84,7 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
       <Provider
         value={{
           actions: {
+            battle: this.battle,
             capture: this.capture,
             login: this.login
           },
@@ -91,15 +108,27 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
     }
   };
 
-  private capture = async (card: {name: string; image: string}) => {
+  private capture = async (name: string, image: string) => {
     this.setState(handleCallPending());
 
-    const {data, error} = await DoggoAPI.capture(card);
+    const {data, error} = await DoggoAPI.capture(name, image);
 
     if (error) {
       this.setState(handleCallFailure(error));
     } else {
       this.setState(handleCaptureSuccess(data!));
+    }
+  };
+
+  private battle = async (ownCard: Card, opponentCard: Card) => {
+    this.setState(handleCallPending());
+
+    const {data, error} = await DoggoAPI.battle(ownCard, opponentCard);
+
+    if (error) {
+      this.setState(handleCallFailure(error));
+    } else {
+      this.setState(handleBattleSuccess(data!));
     }
   };
 }

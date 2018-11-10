@@ -2,6 +2,7 @@
 import fetchMock from 'fetch-mock';
 
 // Mocks
+import {mockBattle} from './mock-battle';
 import {mockCapture} from './mock-capture';
 import {mockLogin} from './mock-login';
 
@@ -31,8 +32,20 @@ fetchMock.mock({
   method: 'POST',
   response: async (_url: string, opts: RequestInit) => {
     const {body} = opts;
-    const {card} = JSON.parse(body as string);
+    const {name, image} = JSON.parse(body as string);
     await sleep(1500);
-    return mockCapture(card);
+    return mockCapture(name, image);
+  }
+});
+
+fetchMock.mock({
+  headers: {'X-API-Key': API_KEY},
+  matcher: `${API_URL}/battle`,
+  method: 'POST',
+  response: async (_url: string, opts: RequestInit) => {
+    const {body} = opts;
+    const {ownCard, opponentCard} = JSON.parse(body as string);
+    await sleep(1500);
+    return mockBattle(ownCard, opponentCard);
   }
 });

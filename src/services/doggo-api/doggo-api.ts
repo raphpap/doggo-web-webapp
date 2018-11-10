@@ -32,18 +32,27 @@ export interface LoginResult extends ApiResult {
   data?: LoginResultData;
 }
 
-export interface LoginResultData {
-  cards: Card[];
-  username: string;
-  nextOpponent: Card;
-}
-
 export interface CaptureResult extends ApiResult {
   data?: CaptureResultData;
 }
 
+export interface BattleResult extends ApiResult {
+  data?: BattleResultData;
+}
+
+export interface LoginResultData {
+  cards: Card[];
+  username: string;
+  opponent: Card;
+}
+
 export interface CaptureResultData {
   card: Card;
+}
+
+export interface BattleResultData {
+  card: Card;
+  opponent: Card;
 }
 
 export interface Card {
@@ -60,11 +69,12 @@ export class DoggoAPI {
     return this.post('/login', {password, username});
   };
 
-  public capture = (card: {
-    name: string;
-    image: string;
-  }): Promise<CaptureResult> => {
-    return this.post('/capture', {card});
+  public capture = (name: string, image: string): Promise<CaptureResult> => {
+    return this.post('/capture', {name, image});
+  };
+
+  public battle = (ownCard: Card, opponentCard: Card): Promise<BattleResult> => {
+    return this.post('/battle', {ownCard, opponentCard});
   };
 
   private post(

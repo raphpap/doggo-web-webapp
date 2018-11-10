@@ -11,7 +11,7 @@ import image_6 from './dogs/dog_6';
 
 export const mockLogin = (
   username: string,
-  password: string
+  password: string,
 ): LoginResultData => ({
   cards: [
     {
@@ -55,7 +55,7 @@ export const mockLogin = (
       name: 'Tiny Tank'
     }
   ],
-  nextOpponent: {
+  opponent: {
     attack: 10,
     defense: 10,
     hp: 10,

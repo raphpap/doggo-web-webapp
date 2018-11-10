@@ -2,18 +2,19 @@
 import React from 'react';
 
 // Types
-import {ApplicationContext} from './types';
+import {ApplicationContext, Card} from './types';
 
 const defaultValue: ApplicationContext = {
   actions: {
-    capture: (card: {name: string; image: string}) => Promise.reject(),
-    login: (username: string, password: string) => Promise.reject()
+    battle: (ownCard: Card, opponentCard: Card) => Promise.reject(),
+    capture: (name: string, image: string) => Promise.reject(),
+    login: (username: string, password: string) => Promise.reject(),
   },
   state: {
     cards: null,
     error: null,
     loading: false,
-    nextOpponent: null
+    opponent: null
   }
 };
 
