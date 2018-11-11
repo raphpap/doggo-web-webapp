@@ -4,14 +4,11 @@ import styled from 'react-emotion';
 // Theme
 import theme from 'doggo-web-webapp/theme';
 
-export const Content = styled.div`
-  box-sizing: border-box;
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  padding-top: ${theme.padding.unit * 8}px;
+  margin-bottom: ${theme.margin.unit * 2.5}px;
 `;
 
-export default Content;
+export default Form;

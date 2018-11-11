@@ -1,10 +1,15 @@
 // Vendor
-import React from 'react';
-import styled from 'react-emotion';
+import React, {ChangeEventHandler, FormEventHandler} from 'react';
 import {compose} from 'recompose';
 
 // Vendor components
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+
+// components
+import Button from './button';
+import ErrorMessage from './error-message';
+import Form from './form';
+import TextField from './text-field';
 
 // Context
 import {
@@ -12,15 +17,13 @@ import {
   WithApplicationContextProps
 } from 'doggo-web-webapp/context';
 
-const Button = styled.button`
-  width: 100px;
-  height: 40px;
-  background-color: #fff;
-  color: #000;
-`;
-
 // Types
-interface State {}
+interface State {
+  username: string;
+  password: string;
+  isDirty: boolean;
+}
+
 interface Props extends RouteComponentProps<never> {}
 type EnhancedProps = Props & WithApplicationContextProps;
 
@@ -30,23 +33,71 @@ const enhance = compose<EnhancedProps, Props>(
 );
 
 export class Login extends React.Component<EnhancedProps, State> {
-  public render() {
-    const {context, location} = this.props;
-    const {state} = context;
-    const {cards} = state;
-    const isAuthenticated = !!cards;
+  public readonly state: Readonly<State> = {
+    isDirty: false,
+    password: '',
+    username: ''
+  };
 
-    const {from} = location.state || {from: {pathname: '/capture'}};
+  public render() {
+    const {cards, error} = this.props.context.state;
+    const isAuthenticated = !!cards;
+    const {from} = this.props.location.state || {from: {pathname: '/capture'}};
+
     if (isAuthenticated) return <Redirect to={from} />;
 
-    return <Button onClick={this.handleLoginClicked}>Login</Button>;
+    const hasError = Boolean(error);
+    const {isDirty, username, password} = this.state;
+
+    return (
+      <Form onSubmit={this.handleSubmit}>
+        <TextField
+          id="username"
+          error={!isDirty && hasError}
+          placeholder="Username"
+          type="text"
+          value={username}
+          onChange={this.handleUsername}
+        />
+
+        <TextField
+          id="password"
+          error={!isDirty && hasError}
+          placeholder={'Password'}
+          type="password"
+          value={password}
+          onChange={this.handlePassword}
+        />
+
+        {!isDirty && hasError && <ErrorMessage />}
+
+        <Button type="submit">Login</Button>
+      </Form>
+    );
   }
 
-  private handleLoginClicked = () => {
-    const {context} = this.props;
-    const {actions} = context;
-    const {login} = actions;
-    login('username', 'password');
+  private handleUsername: ChangeEventHandler<HTMLInputElement> = event => {
+    this.setState({
+      isDirty: true,
+      username: event.target.value
+    });
+  };
+
+  private handlePassword: ChangeEventHandler<HTMLInputElement> = event => {
+    this.setState({
+      isDirty: true,
+      password: event.target.value
+    });
+  };
+
+  private handleSubmit: FormEventHandler<HTMLFormElement> = async event => {
+    event.preventDefault();
+
+    const {login} = this.props.context.actions;
+    const {username, password} = this.state;
+
+    login(username, password);
+    this.setState({isDirty: false});
   };
 }
 
