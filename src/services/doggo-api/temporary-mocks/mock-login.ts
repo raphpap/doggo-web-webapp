@@ -1,18 +1,15 @@
-// Types
-import {LoginResultData} from '../doggo-api';
-
 // Images
 import image_1 from './dogs/dog_1';
 import image_2 from './dogs/dog_2';
 import image_3 from './dogs/dog_3';
-import image_4 from './dogs/dog_4';
-import image_5 from './dogs/dog_5';
 import image_6 from './dogs/dog_6';
 
-export const mockLogin = (
-  username: string,
-  password: string
-): LoginResultData => ({
+export enum Users {
+  Alfa = 'alfa',
+  Bravo = 'bravo'
+}
+
+export const mockAlfa = () => ({
   cards: [
     {
       attack: 50,
@@ -29,7 +26,14 @@ export const mockLogin = (
       id: '2',
       image: image_2,
       name: 'El Borko'
-    },
+    }
+  ],
+  opponent: mockOpponent(),
+  username: Users.Alfa
+});
+
+export const mockBravo = () => ({
+  cards: [
     {
       attack: 50,
       defense: 100,
@@ -37,31 +41,32 @@ export const mockLogin = (
       id: '3',
       image: image_3,
       name: 'Blue Eyed White Pupper'
-    },
-    {
-      attack: 80,
-      defense: 80,
-      hp: 80,
-      id: '4',
-      image: image_4,
-      name: 'King Karl'
-    },
-    {
-      attack: 70,
-      defense: 100,
-      hp: 60,
-      id: '5',
-      image: image_5,
-      name: 'Tiny Tank'
     }
   ],
-  opponent: {
-    attack: 10,
-    defense: 10,
-    hp: 10,
-    id: '99',
-    image: image_6,
-    name: 'Ronaldoggo'
-  },
-  username
+  opponent: mockOpponent(),
+  username: Users.Bravo
 });
+
+export const mockOpponent = () => ({
+  attack: 10,
+  defense: 10,
+  hp: 10,
+  id: '99',
+  image: image_6,
+  name: 'Ronaldoggo'
+});
+
+export const mockError = () => ({
+  status: 401
+});
+
+export const mockLogin = (username: string, password: string) => {
+  switch (username) {
+    case Users.Alfa:
+      return mockAlfa();
+    case Users.Bravo:
+      return mockBravo();
+    default:
+      return mockError();
+  }
+};

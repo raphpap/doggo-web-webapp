@@ -1,6 +1,9 @@
 // Vendor
 import styled from 'react-emotion';
 
+// Theme
+import theme from 'doggo-web-webapp/theme';
+
 export const Container = styled.div`
   display: flex;
   position: absolute;
@@ -9,7 +12,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: #171820;
+  background-color: ${theme.colors.grey.grey60};
 `;
 
 export default Container;

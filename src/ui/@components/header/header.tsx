@@ -9,16 +9,18 @@ import {compose} from 'recompose';
 // Vendor Types
 import {RouteComponentProps} from 'react-router';
 
+// Theme
+import theme from 'doggo-web-webapp/theme';
+
 // Elements
 const Link = styled(NavLink)`
   text-decoration: none;
-  color: #fff;
-  color: rgba(255, 255, 255, 0.7);
+  color: ${theme.colors.white.transparent};
   user-select: none;
 
   &.active {
-    border-bottom: 2px solid #fff;
-    color: #fff;
+    border-bottom: 2px solid ${theme.colors.white.plain};
+    color: ${theme.colors.white.plain};
   }
 `;
 
@@ -30,7 +32,7 @@ const StyledHeader = styled.header`
   align-items: center;
   width: 100%;
   height: 60px;
-  background-color: #0e1111;
+  background-color: ${theme.colors.grey.grey70};
 `;
 
 const Title = styled.h1`

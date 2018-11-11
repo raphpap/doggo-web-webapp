@@ -16,13 +16,16 @@ import './index.css';
 
 // Context
 import {ApplicationContextProvider} from 'doggo-web-webapp/context';
+import {ThemeContextProvider} from 'doggo-web-webapp/theme';
 
 ReactDOM.render(
-  <ApplicationContextProvider>
-    <Router>
-      <Application />
-    </Router>
-  </ApplicationContextProvider>,
+  <ThemeContextProvider>
+    <ApplicationContextProvider>
+      <Router>
+        <Application />
+      </Router>
+    </ApplicationContextProvider>
+  </ThemeContextProvider>,
   document.getElementById('root')
 );
 registerServiceWorker();
