@@ -1,6 +1,5 @@
 // Vendor
 import React from 'react';
-import styled from 'react-emotion';
 import Webcam from 'react-webcam';
 import {compose} from 'recompose';
 
@@ -10,23 +9,15 @@ import {
   WithApplicationContextProps
 } from 'doggo-web-webapp/context';
 
-// Elements
-const Message = styled.p`
-  color: rgba(255, 255, 255, 0.8);
-`;
+// Shared Components
+import Modal from 'doggo-web-webapp/ui/@components/modal';
 
-const Button = styled.button`
-  width: 100px;
-  height: 40px;
-  background-color: #fff;
-  color: #000;
-`;
-
-const HiddenWebcamContainer = styled.div`
-  position: fixed;
-  top: -9999px;
-  left: -9999px;
-`;
+// Components
+import CaptureButton from './capture-button';
+import Form from './form';
+import HiddenWebcamContainer from './hidden-webcam-container';
+import Message from './message';
+import WebcamContainer from './webcam-container';
 
 // Constants
 // const videoConstraints = {
@@ -42,12 +33,14 @@ type EnhancedProps = Props & WithApplicationContextProps;
 const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 
 interface State {
+  capturedImageSrc: string | null;
   isWebcamActive: boolean;
   isHiddenWebcamActive: boolean;
 }
 
 export class Capture extends React.Component<EnhancedProps, State> {
   public readonly state: State = {
+    capturedImageSrc: null,
     isHiddenWebcamActive: false,
     isWebcamActive: false
   };
@@ -63,36 +56,55 @@ export class Capture extends React.Component<EnhancedProps, State> {
   }
 
   public render() {
-    const {isHiddenWebcamActive, isWebcamActive} = this.state;
+    const {capturedImageSrc, isHiddenWebcamActive, isWebcamActive} = this.state;
     const disableCapture = !isHiddenWebcamActive || !isWebcamActive;
 
     return (
       <>
-        <Message>Capture</Message>
-        <Webcam
-          /* width={340} */
-          /* height={260} */
-          width={680}
-          height={520}
-          audio={false}
-          /* videoConstraints={videoConstraints} */
-          onUserMedia={this.onWebcamActivated}
-        />
+        <Message>
+          Find a Doggo and press Capture to make him part of your team!
+        </Message>
 
-        {!disableCapture && (
-          <Button onClick={this.onCaptureClicked}>Capture</Button>
-        )}
+        <div>
+          <WebcamContainer>
+            <Webcam
+              /* width={340} */
+              /* height={260} */
+              width={680}
+              height={520}
+              audio={false}
+              /* videoConstraints={videoConstraints} */
+              onUserMedia={this.onWebcamActivated}
+            />
 
-        <HiddenWebcamContainer>
-          <Webcam
-            width={680}
-            height={520}
-            audio={false}
-            /* videoConstraints={videoConstraints} */
-            onUserMedia={this.onHiddenWebcamActivated}
-            ref={this.setHiddenWebcamRef}
-          />
-        </HiddenWebcamContainer>
+            {!disableCapture && !capturedImageSrc && (
+              <CaptureButton onClick={this.onCaptureClicked}>
+                Capture
+              </CaptureButton>
+            )}
+          </WebcamContainer>
+
+          <HiddenWebcamContainer>
+            <Webcam
+              width={680}
+              height={520}
+              audio={false}
+              /* videoConstraints={videoConstraints} */
+              onUserMedia={this.onHiddenWebcamActivated}
+              ref={this.setHiddenWebcamRef}
+            />
+          </HiddenWebcamContainer>
+        </div>
+
+        <Modal isOpen={!!capturedImageSrc} onClose={this.closeModal}>
+          {capturedImageSrc && (
+            <Form
+              imageSrc={capturedImageSrc}
+              onClose={this.closeModal}
+              onSubmit={this.handleSubmit}
+            />
+          )}
+        </Modal>
       </>
     );
   }
@@ -116,13 +128,18 @@ export class Capture extends React.Component<EnhancedProps, State> {
   };
 
   private onCaptureClicked = () => {
-    const {context} = this.props;
-    const {actions} = context;
-    const {capture} = actions;
-
     const imageSrc = this.hiddenWebcam.getScreenshot() as string;
+    this.setState({capturedImageSrc: imageSrc});
+  };
 
-    capture('New Card', imageSrc);
+  private closeModal = () => {
+    this.setState({capturedImageSrc: null});
+  };
+
+  private handleSubmit = (cardName: string, imageSrc: string) => {
+    const {capture} = this.props.context.actions;
+    capture(cardName, imageSrc);
+    this.closeModal();
   };
 }
 
