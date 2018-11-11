@@ -1,4 +1,5 @@
 // Vendor
+import * as tf from '@tensorflow/tfjs';
 import React from 'react';
 import styled from 'react-emotion';
 import Webcam from 'react-webcam';
@@ -9,6 +10,10 @@ import {
   withApplicationContext,
   WithApplicationContextProps
 } from 'doggo-web-webapp/context';
+
+// components
+import {Detector} from './detector';
+import {Predictor} from './predictor';
 
 // Elements
 const Message = styled.p`
@@ -29,60 +34,46 @@ const HiddenWebcamContainer = styled.div`
 `;
 
 // Constants
-const videoConstraints = {
-  facingMode: 'environment',
-  height: 720,
-  width: 1280
-};
+// const videoConstraints = {
+//   facingMode: 'environment',
+//   height: 720,
+//   width: 1280
+// };
 
 // Types
-interface Props {}
+interface Props {
+  mobilenet: tf.Model | null;
+  model: tf.Model | null;
+}
 type EnhancedProps = Props & WithApplicationContextProps;
 
 const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 
 interface State {
-  isWebcamActive: boolean;
   isHiddenWebcamActive: boolean;
+  isTensorWebcamReady: boolean;
+  tensorWebcam: any;
 }
 
 export class Capture extends React.Component<EnhancedProps, State> {
   public readonly state: State = {
     isHiddenWebcamActive: false,
-    isWebcamActive: false
+    isTensorWebcamReady: false,
+    tensorWebcam: null
   };
 
   private hiddenWebcam = React.createRef() as any;
 
-  private webcamTimer?: number;
-  private hiddenWebcamTimer?: number;
-
-  public componentWillUnmount() {
-    window.clearTimeout(this.webcamTimer);
-    window.clearTimeout(this.hiddenWebcamTimer);
-  }
-
   public render() {
-    const {isHiddenWebcamActive, isWebcamActive} = this.state;
-    const disableCapture = !isHiddenWebcamActive || !isWebcamActive;
+    const {isHiddenWebcamActive, tensorWebcam} = this.state;
+    const {mobilenet, model} = this.props;
 
     return (
       <>
         <Message>Capture</Message>
-        <Webcam
-          /* width={340} */
-          /* height={260} */
-          width={680}
-          height={520}
-          audio={false}
-          /* videoConstraints={videoConstraints} */
-          onUserMedia={this.onWebcamActivated}
-        />
 
-        {!disableCapture && (
-          <Button onClick={this.onCaptureClicked}>Capture</Button>
-        )}
-
+        <Detector onTensorWebcamReady={this.updateTensorWebcam} />
+        
         <HiddenWebcamContainer>
           <Webcam
             width={680}
@@ -93,6 +84,16 @@ export class Capture extends React.Component<EnhancedProps, State> {
             ref={this.setHiddenWebcamRef}
           />
         </HiddenWebcamContainer>
+
+        {isHiddenWebcamActive && mobilenet && model && tensorWebcam && (
+          <Predictor
+            mobilenet={mobilenet}
+            model={model}
+            tensorWebcam={tensorWebcam}
+          >
+            <Button onClick={this.onCaptureClicked}>Capture</Button>
+          </Predictor>
+        )}
       </>
     );
   }
@@ -101,18 +102,13 @@ export class Capture extends React.Component<EnhancedProps, State> {
     this.hiddenWebcam = webcam;
   };
 
-  private onWebcamActivated = () => {
-    this.webcamTimer = window.setTimeout(() => {
-      this.setState({isWebcamActive: true});
-    }, 3000);
-  };
-
   private onHiddenWebcamActivated = () => {
     this.hiddenWebcam.getScreenshot();
+    this.setState({isHiddenWebcamActive: true});
+  };
 
-    this.hiddenWebcamTimer = window.setTimeout(() => {
-      this.setState({isHiddenWebcamActive: true});
-    }, 3000);
+  private updateTensorWebcam = (tensorWebcam: any) => {
+    this.setState({tensorWebcam});
   };
 
   private onCaptureClicked = () => {
@@ -122,7 +118,7 @@ export class Capture extends React.Component<EnhancedProps, State> {
 
     const imageSrc = this.hiddenWebcam.getScreenshot() as string;
 
-    capture(imageSrc, 'New Card');
+    capture('New Card', imageSrc);
   };
 }
 

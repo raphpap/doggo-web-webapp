@@ -70,8 +70,8 @@ const handleBattleSuccess = ({card, opponent}: BattleResultData) => (
 
   return {
     ...state,
-    cards: state.cards.map(
-      mappedCard => (mappedCard.id === card.id ? card : mappedCard)
+    cards: state.cards.map(mappedCard =>
+      mappedCard.id === card.id ? card : mappedCard
     ),
     loading: false,
     opponent

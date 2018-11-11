@@ -1,4 +1,5 @@
 // Vendor
+import * as tf from '@tensorflow/tfjs';
 import React, {Component} from 'react';
 import {compose} from 'recompose';
 
@@ -27,6 +28,21 @@ import {
   WithApplicationContextProps
 } from 'doggo-web-webapp/context';
 
+// Configurations
+import {
+  MOBILENET_LAYER,
+  MOBILENET_URL,
+  MODEL_URL
+} from 'doggo-web-webapp/configurations/environment';
+
+// State
+// Interfaces
+interface State {
+  mobilenet: tf.Model | null;
+  model: tf.Model | null;
+  isMounted: boolean;
+}
+
 // Types
 interface Props extends RouteComponentProps<never> {}
 type EnhancedProps = Props & WithApplicationContextProps;
@@ -38,6 +54,22 @@ const enhance = compose<EnhancedProps, Props>(
 
 // Interfaces
 export class Authenticated extends Component<EnhancedProps> {
+  public readonly state: Readonly<State> = {
+    isMounted: false,
+    mobilenet: null,
+    model: null
+  };
+
+  public componentDidMount() {
+    this.setState({isMounted: true});
+    this.loadModel();
+    this.loadMobilenet();
+  }
+
+  public componentDiUnmMount() {
+    this.setState({isMounted: false});
+  }
+
   public render() {
     const {context, location} = this.props;
     const {state} = context;
@@ -55,12 +87,17 @@ export class Authenticated extends Component<EnhancedProps> {
       );
     }
 
+    const {mobilenet, model} = this.state;
+
     return (
       <Container>
         <Header />
         <Content>
           <Switch>
-            <Route path="/capture" component={Capture} />
+            <Route
+              path="/capture"
+              render={() => <Capture mobilenet={mobilenet} model={model} />}
+            />
             <Route
               path="/team/card/:cardId"
               render={({match}) => (
@@ -74,6 +111,27 @@ export class Authenticated extends Component<EnhancedProps> {
         </Content>
       </Container>
     );
+  }
+
+  private async loadModel() {
+    const trainedModel = await tf.loadModel(MODEL_URL);
+    if (this.state.isMounted) {
+      this.setState({model: trainedModel});
+    }
+  }
+
+  private async loadMobilenet() {
+    const mobilenet = await tf.loadModel(MOBILENET_URL);
+    // Return a model that outputs an internal activation.
+    const layer = mobilenet.getLayer(MOBILENET_LAYER);
+    const mobilenetModel = tf.model({
+      inputs: mobilenet.inputs,
+      outputs: layer.output
+    });
+
+    if (this.state.isMounted) {
+      this.setState({mobilenet: mobilenetModel});
+    }
   }
 }
 
