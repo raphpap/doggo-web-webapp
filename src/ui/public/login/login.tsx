@@ -5,9 +5,11 @@ import {compose} from 'recompose';
 // Vendor components
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 
-// components
+// Shared components
+import ErrorMessage from 'doggo-web-webapp/ui/@components/error-message';
+
+// Components
 import Button from './button';
-import ErrorMessage from './error-message';
 import Form from './form';
 import TextField from './text-field';
 
@@ -69,7 +71,9 @@ export class Login extends React.Component<EnhancedProps, State> {
           onChange={this.handlePassword}
         />
 
-        {!isDirty && hasError && <ErrorMessage />}
+        {!isDirty && hasError && (
+          <ErrorMessage message="Wrong username and/or password" />
+        )}
 
         <Button type="submit">Login</Button>
       </Form>

@@ -3,9 +3,6 @@ import React from 'react';
 import styled from 'react-emotion';
 import {compose} from 'recompose';
 
-// Vendor Components
-import Modal from 'react-responsive-modal';
-
 // Vendor Types
 import {RouteComponentProps, withRouter} from 'react-router';
 
@@ -21,6 +18,7 @@ import findCard from 'doggo-web-webapp/utilities/find-card';
 
 // Shared Components
 import BigCard from 'doggo-web-webapp/ui/@components/big-card';
+import Modal from 'doggo-web-webapp/ui/@components/modal';
 import SmallCard from 'doggo-web-webapp/ui/@components/small-card';
 
 // Elements
@@ -33,16 +31,6 @@ const CardsList = styled.ul`
 const Message = styled.p`
   color: rgba(255, 255, 255, 0.8);
 `;
-
-const ModalCss = {
-  closeIcon: {
-    fill: 'rgba(255, 255, 255, 0.8)'
-  },
-  modal: {
-    backgroundColor: '#171820',
-    paddingTop: '40px'
-  }
-};
 
 // Types
 interface Props {
@@ -84,14 +72,7 @@ export class Team extends React.Component<EnhancedProps> {
           ))}
         </CardsList>
 
-        <Modal
-          open={!!selectedCard}
-          onClose={() => {
-            this.closeModal();
-          }}
-          styles={ModalCss}
-          center
-        >
+        <Modal isOpen={!!selectedCard} onClose={this.closeModal}>
           {selectedCard && <BigCard card={selectedCard} />}
         </Modal>
       </>

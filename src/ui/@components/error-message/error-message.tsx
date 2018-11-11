@@ -5,7 +5,9 @@ import styled from 'react-emotion';
 // Theme
 import theme from 'doggo-web-webapp/theme';
 
-interface Props {}
+interface Props {
+  message: string;
+}
 
 const Container = styled.div`
   display: flex;
@@ -17,9 +19,9 @@ const Container = styled.div`
   color: ${theme.colors.white.plain};
 `;
 
-export const ErrorMessage: React.SFC<Props> = () => (
+export const ErrorMessage: React.SFC<Props> = ({message}) => (
   <Container>
-    <span>Wrong username and/or password</span>
+    <span>{message}</span>
   </Container>
 );
 
