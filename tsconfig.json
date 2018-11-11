@@ -26,7 +26,8 @@
     "target": "es5",
     "paths": {
       "doggo-web-webapp/*": [
-        "./src/*"
+        "./src/*",
+        "./typings/*"
       ]
     }
   }

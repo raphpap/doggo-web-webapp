@@ -90,6 +90,7 @@ export class TensorWebcam {
         navigatorAny.webkitGetUserMedia ||
         navigatorAny.mozGetUserMedia ||
         navigatorAny.msGetUserMedia;
+
       if (navigator.getUserMedia) {
         navigator.getUserMedia(
           {video: true},

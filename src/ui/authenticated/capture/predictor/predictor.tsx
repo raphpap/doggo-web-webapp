@@ -1,6 +1,6 @@
 // Vendor
 import * as tf from '@tensorflow/tfjs';
-import React, {Component} from 'react';
+import {Component} from 'react';
 
 enum PredictedClasses {
   Doggo = 0,
@@ -36,13 +36,13 @@ export class Predictor extends Component<Props, State> {
   }
 
   public render() {
-    return this.state.isDoggo ? this.props.children : <div>no</div>;
+    return this.state.isDoggo ? this.props.children : null;
   }
 
   public predict = () => {
     this.timer = window.setInterval(() => {
       this.doPrediction();
-    }, 1000);
+    }, 500);
   };
 
   private async doPrediction() {

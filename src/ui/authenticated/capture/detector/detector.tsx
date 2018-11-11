@@ -31,6 +31,10 @@ export class Detector extends Component<Props> {
     this.props.onTensorWebcamReady(this.tensorWebcam);
   }
 
+  public componentWillUnmount() {
+    this.tensorWebcam = null;
+  }
+
   public render() {
     return (
       <Container>

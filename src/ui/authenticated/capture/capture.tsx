@@ -73,7 +73,7 @@ export class Capture extends React.Component<EnhancedProps, State> {
         <Message>Capture</Message>
 
         <Detector onTensorWebcamReady={this.updateTensorWebcam} />
-        
+
         <HiddenWebcamContainer>
           <Webcam
             width={680}
