@@ -73,7 +73,10 @@ export class DoggoAPI {
     return this.post('/capture', {name, image});
   };
 
-  public battle = (ownCard: Card, opponentCard: Card): Promise<BattleResult> => {
+  public battle = (
+    ownCard: Card,
+    opponentCard: Card
+  ): Promise<BattleResult> => {
     return this.post('/battle', {ownCard, opponentCard});
   };
 

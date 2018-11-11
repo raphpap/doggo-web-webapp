@@ -32,25 +32,22 @@ import findCard from 'doggo-web-webapp/utilities/find-card';
 // Types
 interface Props {}
 
-type EnhancedProps = Props
-  & WithApplicationContextProps;
+type EnhancedProps = Props & WithApplicationContextProps;
 
 interface State {
-  selectedCardId: string | null,
+  selectedCardId: string | null;
   showCardSelectionModal: boolean;
   showModalCard: Card | null;
 }
 
-const enhance = compose<EnhancedProps, Props>(
-  withApplicationContext
-);
+const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 
 export class Battle extends React.Component<EnhancedProps, State> {
   public readonly state: State = {
     selectedCardId: null,
     showCardSelectionModal: false,
     showModalCard: null
-  }
+  };
 
   public render() {
     const {selectedCardId, showCardSelectionModal, showModalCard} = this.state;
@@ -60,27 +57,35 @@ export class Battle extends React.Component<EnhancedProps, State> {
 
     if (!cards || !opponent) return <Message>Loading...</Message>;
 
-    const selectedCard = findCard(selectedCardId || '', cards);
+    const selectedCard = findCard(selectedCardId || '', cards);
 
     return (
       <>
         <Message>Battle</Message>
 
         <CardContainer>
-          <SmallCard card={opponent} onCardClick={(card: Card) => this.openCardModal(card)}/>
+          <SmallCard
+            card={opponent}
+            onCardClick={(card: Card) => this.openCardModal(card)}
+          />
         </CardContainer>
 
         <div>
-        {selectedCard ? (
-          <ActionContainer onClick={() => this.onBattleClicked(selectedCard)}>Battle!</ActionContainer>
-        ) : (
-          <ActionContainer>VS</ActionContainer>
-        )}
+          {selectedCard ? (
+            <ActionContainer onClick={() => this.onBattleClicked(selectedCard)}>
+              Battle!
+            </ActionContainer>
+          ) : (
+            <ActionContainer>VS</ActionContainer>
+          )}
         </div>
 
         {selectedCard ? (
           <CardContainer>
-            <SmallCard card={selectedCard} onCardClick={(card: Card) => this.openCardModal(card)}/>
+            <SmallCard
+              card={selectedCard}
+              onCardClick={(card: Card) => this.openCardModal(card)}
+            />
           </CardContainer>
         ) : (
           <div>
@@ -90,11 +95,26 @@ export class Battle extends React.Component<EnhancedProps, State> {
           </div>
         )}
 
-        <Modal open={showCardSelectionModal} onClose={this.closeCardSelectionModal} styles={ModalCss} center>
-          <CardSelection cards={cards} onCardSelect={(card: Card) => {this.handleCardSelected(card)}}/>
+        <Modal
+          open={showCardSelectionModal}
+          onClose={this.closeCardSelectionModal}
+          styles={ModalCss}
+          center
+        >
+          <CardSelection
+            cards={cards}
+            onCardSelect={(card: Card) => {
+              this.handleCardSelected(card);
+            }}
+          />
         </Modal>
 
-        <Modal open={!!showModalCard} onClose={this.closeCardModal} styles={ModalCss} center>
+        <Modal
+          open={!!showModalCard}
+          onClose={this.closeCardModal}
+          styles={ModalCss}
+          center
+        >
           {showModalCard && <BigCard card={showModalCard} />}
         </Modal>
       </>
@@ -110,30 +130,30 @@ export class Battle extends React.Component<EnhancedProps, State> {
     if (selectedCard && opponent) {
       battle(selectedCard, opponent);
     }
-  }
+  };
 
   private handleCardSelected = (card: Card) => {
     this.setState({
       selectedCardId: card.id,
       showCardSelectionModal: false
     });
-  }
+  };
 
   private openCardSelectionModal = () => {
     this.setState({showCardSelectionModal: true});
-  }
+  };
 
   private closeCardSelectionModal = () => {
     this.setState({showCardSelectionModal: false});
-  }
+  };
 
   private openCardModal = (card: Card) => {
     this.setState({showModalCard: card});
-  }
+  };
 
   private closeCardModal = () => {
     this.setState({showModalCard: null});
-  }
+  };
 }
 
 export default enhance(Battle);

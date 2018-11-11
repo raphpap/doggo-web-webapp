@@ -28,11 +28,17 @@ export class CardSelection extends React.Component<Props> {
     return (
       <CardsList>
         {cards.map((card, index) => (
-          <SmallCard key={index} card={card} onCardClick={(card: Card) => {onCardSelect(card)}}/>
+          <SmallCard
+            key={index}
+            card={card}
+            onCardClick={(card: Card) => {
+              onCardSelect(card);
+            }}
+          />
         ))}
       </CardsList>
     );
   }
-};
+}
 
 export default CardSelection;

@@ -30,7 +30,7 @@ const HiddenWebcamContainer = styled.div`
 
 // Constants
 const videoConstraints = {
-  facingMode: "environment",
+  facingMode: 'environment',
   height: 720,
   width: 1280
 };
@@ -80,9 +80,7 @@ export class Capture extends React.Component<EnhancedProps, State> {
         />
 
         {!disableCapture && (
-          <Button onClick={this.onCaptureClicked}>
-            Capture
-          </Button>
+          <Button onClick={this.onCaptureClicked}>Capture</Button>
         )}
 
         <HiddenWebcamContainer>
@@ -124,10 +122,7 @@ export class Capture extends React.Component<EnhancedProps, State> {
 
     const imageSrc = this.hiddenWebcam.getScreenshot() as string;
 
-    capture(
-      imageSrc,
-      'New Card'
-    );
+    capture(imageSrc, 'New Card');
   };
 }
 

@@ -45,7 +45,12 @@ export const BigCard: React.SFC<Props> = ({card}) => {
 
       <Info>
         <div>{name}</div>
-        <Stats>{hp}hp {attack}atk {defense}def</Stats>
+        <Stats>
+          {hp}
+          hp {attack}
+          atk {defense}
+          def
+        </Stats>
       </Info>
     </CardContainer>
   );

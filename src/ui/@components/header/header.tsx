@@ -41,20 +41,23 @@ const Title = styled.h1`
 // Types
 interface Props {}
 
-type EnhancedProps = Props &
-  RouteComponentProps<never>;
+type EnhancedProps = Props & RouteComponentProps<never>;
 
-const enhance = compose<EnhancedProps, Props>(
-  withRouter
-);
+const enhance = compose<EnhancedProps, Props>(withRouter);
 
 export class Header extends Component<EnhancedProps> {
   public render() {
     return (
       <StyledHeader>
-        <Link to="/team" activeClassName={'active'}><Title>Team</Title></Link>
-        <Link to="/capture" activeClassName={'active'}><Title>Capture</Title></Link>
-        <Link to="/battle" activeClassName={'active'}><Title>Battle</Title></Link>
+        <Link to="/team" activeClassName={'active'}>
+          <Title>Team</Title>
+        </Link>
+        <Link to="/capture" activeClassName={'active'}>
+          <Title>Capture</Title>
+        </Link>
+        <Link to="/battle" activeClassName={'active'}>
+          <Title>Battle</Title>
+        </Link>
       </StyledHeader>
     );
   }

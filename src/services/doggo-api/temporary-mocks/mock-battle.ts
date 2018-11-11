@@ -2,9 +2,9 @@
 import {BattleResultData, Card} from '../doggo-api';
 
 export const mockBattle: (
-    ownCard: Card,
-    opponentCard: Card
-  ) => BattleResultData = (ownCard, opponentCard) => {
+  ownCard: Card,
+  opponentCard: Card
+) => BattleResultData = (ownCard, opponentCard) => {
   return {
     card: {
       ...ownCard,

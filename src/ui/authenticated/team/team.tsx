@@ -48,9 +48,9 @@ const ModalCss = {
 interface Props {
   cardId?: string;
 }
-type EnhancedProps = Props
-  & WithApplicationContextProps
-  & RouteComponentProps<never>;
+type EnhancedProps = Props &
+  WithApplicationContextProps &
+  RouteComponentProps<never>;
 
 const enhance = compose<EnhancedProps, Props>(
   withApplicationContext,
@@ -74,11 +74,24 @@ export class Team extends React.Component<EnhancedProps> {
         <Message>Team</Message>
         <CardsList>
           {cards.map((card, index) => (
-            <SmallCard key={index} card={card} onCardClick={(card: Card) => {this.openModal(card.id)}}/>
+            <SmallCard
+              key={index}
+              card={card}
+              onCardClick={(card: Card) => {
+                this.openModal(card.id);
+              }}
+            />
           ))}
         </CardsList>
 
-        <Modal open={!!selectedCard} onClose={() => {this.closeModal()}} styles={ModalCss} center>
+        <Modal
+          open={!!selectedCard}
+          onClose={() => {
+            this.closeModal();
+          }}
+          styles={ModalCss}
+          center
+        >
           {selectedCard && <BigCard card={selectedCard} />}
         </Modal>
       </>
@@ -86,12 +99,12 @@ export class Team extends React.Component<EnhancedProps> {
   }
 
   private openModal = (cardId: string) => {
-    this.props.history.replace(`/team/card/${cardId}`)
-  }
+    this.props.history.replace(`/team/card/${cardId}`);
+  };
 
   private closeModal = () => {
     this.props.history.replace('/team');
-  }
-};
+  };
+}
 
 export default enhance(Team);

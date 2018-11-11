@@ -11,7 +11,7 @@ import image_6 from './dogs/dog_6';
 
 export const mockLogin = (
   username: string,
-  password: string,
+  password: string
 ): LoginResultData => ({
   cards: [
     {

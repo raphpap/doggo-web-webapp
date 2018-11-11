@@ -45,12 +45,21 @@ export const SmallCard: React.SFC<Props> = ({card, onCardClick}) => {
   const {attack, defense, hp, name, image} = card;
 
   return (
-    <CardContainer onClick={() => {onCardClick(card)}}>
+    <CardContainer
+      onClick={() => {
+        onCardClick(card);
+      }}
+    >
       <Image src={image} />
 
       <Info>
         <div>{name}</div>
-        <Stats>{hp}hp {attack}atk {defense}def</Stats>
+        <Stats>
+          {hp}
+          hp {attack}
+          atk {defense}
+          def
+        </Stats>
       </Info>
     </CardContainer>
   );

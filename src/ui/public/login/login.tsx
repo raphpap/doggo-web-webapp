@@ -20,8 +20,8 @@ const Button = styled.button`
 `;
 
 // Types
-interface State {};
-interface Props extends RouteComponentProps<never> {};
+interface State {}
+interface Props extends RouteComponentProps<never> {}
 type EnhancedProps = Props & WithApplicationContextProps;
 
 const enhance = compose<EnhancedProps, Props>(
@@ -36,14 +36,10 @@ export class Login extends React.Component<EnhancedProps, State> {
     const {cards} = state;
     const isAuthenticated = !!cards;
 
-    const {from} = location.state || { from: { pathname: '/capture' } }
+    const {from} = location.state || {from: {pathname: '/capture'}};
     if (isAuthenticated) return <Redirect to={from} />;
 
-    return (
-      <Button onClick={this.handleLoginClicked}>
-        Login
-      </Button>
-    );
+    return <Button onClick={this.handleLoginClicked}>Login</Button>;
   }
 
   private handleLoginClicked = () => {

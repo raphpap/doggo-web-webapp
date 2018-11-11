@@ -16,12 +16,10 @@ import {
 } from 'doggo-web-webapp/context';
 
 // Types
-interface Props {};
+interface Props {}
 type EnhancedProps = Props & WithApplicationContextProps;
 
-const enhance = compose<EnhancedProps, Props>(
-  withApplicationContext
-);
+const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 
 // Interfaces
 export class Application extends Component<EnhancedProps> {
