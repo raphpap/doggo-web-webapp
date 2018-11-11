@@ -14,6 +14,8 @@ const sleep = (delayMS: number) => {
   return new Promise(resolve => setTimeout(resolve, delayMS));
 };
 
+fetchMock.config.fallbackToNetwork = true;
+
 fetchMock.mock({
   headers: {'X-API-Key': API_KEY},
   matcher: `${API_URL}/login`,
