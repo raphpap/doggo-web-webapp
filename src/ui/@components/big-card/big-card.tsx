@@ -37,7 +37,7 @@ interface Props {
 }
 
 export const BigCard: React.SFC<Props> = ({card}) => {
-  const {attack, defense, hp, name, image} = card;
+  const {attack, defense, hpLeft, hpTotal, name, image} = card;
 
   return (
     <CardContainer>
@@ -46,7 +46,7 @@ export const BigCard: React.SFC<Props> = ({card}) => {
       <Info>
         <div>{name}</div>
         <Stats>
-          {hp}
+          {hpLeft}/{hpTotal}
           hp {attack}
           atk {defense}
           def

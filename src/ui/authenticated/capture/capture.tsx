@@ -10,13 +10,13 @@ import {
 } from 'doggo-web-webapp/context';
 
 // Shared Components
+import Message from 'doggo-web-webapp/ui/@components/message';
 import Modal from 'doggo-web-webapp/ui/@components/modal';
 
 // Components
 import CaptureButton from './capture-button';
 import Form from './form';
 import HiddenWebcamContainer from './hidden-webcam-container';
-import Message from './message';
 import WebcamContainer from './webcam-container';
 
 // Constants

@@ -59,7 +59,8 @@ export interface Card {
   id: string;
   name: string;
   image: string;
-  hp: number;
+  hpTotal: number;
+  hpLeft: number;
   attack: number;
   defense: number;
 }

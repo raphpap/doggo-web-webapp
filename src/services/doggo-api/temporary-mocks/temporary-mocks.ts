@@ -23,7 +23,7 @@ fetchMock.mock({
   response: async (_url: string, opts: RequestInit) => {
     const {body} = opts;
     const {username, password} = JSON.parse(body as string);
-    await sleep(1500);
+    await sleep(200);
     return mockLogin(username, password);
   }
 });
@@ -35,7 +35,7 @@ fetchMock.mock({
   response: async (_url: string, opts: RequestInit) => {
     const {body} = opts;
     const {name, image} = JSON.parse(body as string);
-    await sleep(1500);
+    await sleep(200);
     return mockCapture(name, image);
   }
 });
@@ -47,7 +47,7 @@ fetchMock.mock({
   response: async (_url: string, opts: RequestInit) => {
     const {body} = opts;
     const {ownCard, opponentCard} = JSON.parse(body as string);
-    await sleep(1500);
+    await sleep(200);
     return mockBattle(ownCard, opponentCard);
   }
 });

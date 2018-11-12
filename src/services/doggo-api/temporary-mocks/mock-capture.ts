@@ -7,13 +7,18 @@ import generateRandomNumber from 'doggo-web-webapp/utilities/generate-random-num
 export const mockCapture: (name: string, image: string) => CaptureResultData = (
   name,
   image
-) => ({
-  card: {
-    attack: generateRandomNumber(20, 100),
-    defense: generateRandomNumber(20, 100),
-    hp: generateRandomNumber(20, 100),
-    id: generateRandomNumber(1000, 100000).toString(),
-    image,
-    name
-  }
-});
+) => {
+  const hp = generateRandomNumber(20, 50) * 10;
+
+  return {
+    card: {
+      attack: generateRandomNumber(2, 10) * 10,
+      defense: generateRandomNumber(2, 10) * 10,
+      hpLeft: hp,
+      hpTotal: hp,
+      id: generateRandomNumber(1000, 100000).toString(),
+      image,
+      name
+    }
+  };
+};

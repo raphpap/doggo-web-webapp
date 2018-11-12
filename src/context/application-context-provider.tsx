@@ -13,16 +13,20 @@ import DoggoAPI, {
 } from 'doggo-web-webapp/services/doggo-api';
 
 // Types
-import {Card, ContextState} from './types';
+import {BattleStatus, Card, ContextState} from './types';
 
 type State = Readonly<ContextState>;
 
 // Constants
 const INITIAL_STATE: State = {
+  battle: {
+    cardId: null,
+    opponent: null,
+    status: BattleStatus.NoOpponent
+  },
   cards: null,
   error: null,
-  loading: false,
-  opponent: null
+  loading: false
 };
 
 const handleCallPending = () => ({
@@ -40,9 +44,13 @@ const handleLoginSuccess = ({cards, opponent, username}: LoginResultData) => (
 ) => {
   return {
     ...state,
+    battle: {
+      cardId: null,
+      opponent,
+      status: BattleStatus.NoCardSelected
+    },
     cards,
     loading: false,
-    opponent,
     username
   };
 };
@@ -61,6 +69,27 @@ const handleCaptureSuccess = ({card}: CaptureResultData) => (
   };
 };
 
+const handleBeginBattle = () => (state: ContextState) => {
+  return {
+    ...state,
+    ...handleCallPending(),
+    battle: {
+      ...state.battle,
+      status: BattleStatus.Ongoing
+    }
+  };
+};
+
+const handleSelectCard = (card: Card) => (state: ContextState) => {
+  return {
+    ...state,
+    battle: {
+      ...state.battle,
+      cardId: card.id
+    }
+  };
+};
+
 const handleBattleSuccess = ({card, opponent}: BattleResultData) => (
   state: ContextState
 ) => {
@@ -70,11 +99,15 @@ const handleBattleSuccess = ({card, opponent}: BattleResultData) => (
 
   return {
     ...state,
+    battle: {
+      ...state.battle,
+      opponent,
+      status: opponent.hpLeft === 0 ? BattleStatus.Won : BattleStatus.Lost
+    },
     cards: state.cards.map(mappedCard =>
       mappedCard.id === card.id ? card : mappedCard
     ),
-    loading: false,
-    opponent
+    loading: false
   };
 };
 
@@ -88,7 +121,8 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
           actions: {
             battle: this.battle,
             capture: this.capture,
-            login: this.login
+            login: this.login,
+            selectBattleCard: this.selectBattleCard
           },
           state: {...this.state}
         }}
@@ -98,15 +132,15 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
     );
   }
 
-  private login = async (username: string, password: string) => {
-    this.setState(handleCallPending());
+  private battle = async (ownCard: Card, opponentCard: Card) => {
+    this.setState(handleBeginBattle());
 
-    const {data, error} = await DoggoAPI.login(username, password);
+    const {data, error} = await DoggoAPI.battle(ownCard, opponentCard);
 
     if (error) {
       this.setState(handleCallFailure(error));
     } else {
-      this.setState(handleLoginSuccess(data!));
+      this.setState(handleBattleSuccess(data!));
     }
   };
 
@@ -122,15 +156,19 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
     }
   };
 
-  private battle = async (ownCard: Card, opponentCard: Card) => {
+  private login = async (username: string, password: string) => {
     this.setState(handleCallPending());
 
-    const {data, error} = await DoggoAPI.battle(ownCard, opponentCard);
+    const {data, error} = await DoggoAPI.login(username, password);
 
     if (error) {
       this.setState(handleCallFailure(error));
     } else {
-      this.setState(handleBattleSuccess(data!));
+      this.setState(handleLoginSuccess(data!));
     }
+  };
+
+  private selectBattleCard = async (card: Card) => {
+    this.setState(handleSelectCard(card));
   };
 }

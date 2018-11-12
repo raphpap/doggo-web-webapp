@@ -6,23 +6,40 @@ export interface ApplicationContext {
 }
 
 export interface ContextActions {
-  login: (username: string, password: string) => void;
-  capture: (name: string, image: string) => void;
   battle: (ownCard: Card, opponentCard: Card) => void;
+  capture: (name: string, image: string) => void;
+  login: (username: string, password: string) => void;
+  selectBattleCard: (card: Card) => void;
 }
 
 export interface ContextState {
   cards: Card[] | null;
   error: ApiError | null;
   loading: boolean;
-  opponent: Card | null;
+  battle: Battle;
 }
 
 export interface Card {
   id: string;
   name: string;
   image: string;
-  hp: number;
+  hpTotal: number;
+  hpLeft: number;
   attack: number;
   defense: number;
+}
+
+export interface Battle {
+  cardId: string | null;
+  opponent: Card | null;
+  status: BattleStatus;
+}
+
+export enum BattleStatus {
+  NoOpponent = 'no-opponent',
+  NoCardSelected = 'no-card-selected',
+  Ready = 'ready',
+  Ongoing = 'ongoing',
+  Won = 'won',
+  Lost = 'lost'
 }

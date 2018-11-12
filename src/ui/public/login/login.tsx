@@ -5,13 +5,16 @@ import {compose} from 'recompose';
 // Vendor components
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 
+// Assets
+import logo from 'doggo-web-webapp/assets/images/doggo-logo.png';
+
 // Shared components
 import ErrorMessage from 'doggo-web-webapp/ui/@components/error-message';
+import Logo from 'doggo-web-webapp/ui/@components/logo';
 
 // Components
 import Button from './button';
 import Form from './form';
-import Logo from './logo';
 import TextField from './text-field';
 
 // Context
@@ -54,7 +57,7 @@ export class Login extends React.Component<EnhancedProps, State> {
 
     return (
       <>
-        <Logo />
+        <Logo logo={logo} marginUnits={5} />
 
         <Form onSubmit={this.handleSubmit}>
           <TextField

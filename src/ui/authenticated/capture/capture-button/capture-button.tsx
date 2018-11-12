@@ -1,27 +1,53 @@
 // Vendor
+import React from 'react';
 import styled from 'react-emotion';
+
+// Assets
+import logo from 'doggo-web-webapp/assets/images/capture-logo.png';
 
 // Theme
 import theme from 'doggo-web-webapp/theme';
 
-export const CaptureButton = styled.button`
+// Shared Components
+import Logo from 'doggo-web-webapp/ui/@components/logo';
+
+// Types
+interface Props {
+  onClick: () => void;
+}
+
+// Elements
+const CaptureButtonComponent = styled.button`
   position: absolute;
   z-index: 50;
   bottom: ${theme.margin.unit * 2}px;
-  width: 100px;
-  height: 100px;
-  border: 2px solid ${theme.colors.grey.grey60};
-  border-radius: 50%;
-  background-color: ${theme.colors.white.transparent};
+  width: 160px;
+  height: 80px;
+  border: 5px solid #0ff;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
   outline: none;
+  text-align: center;
   font-size: 16px;
   font-weight: 700;
   color: #000;
   cursor: pointer;
 
   :active {
-    border: 2px solid green;
+    border: 6px solid #0ff;
   }
 `;
+
+export class CaptureButton extends React.Component<Props> {
+  public render() {
+    const {onClick} = this.props;
+
+    return (
+      <CaptureButtonComponent onClick={onClick}>
+        <Logo logo={logo} marginUnits={0.1} />
+      </CaptureButtonComponent>
+    );
+  }
+}
 
 export default CaptureButton;

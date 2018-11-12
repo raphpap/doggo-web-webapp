@@ -6,6 +6,9 @@ import {compose} from 'recompose';
 // Vendor Types
 import {RouteComponentProps, withRouter} from 'react-router';
 
+// Assets
+import logo from 'doggo-web-webapp/assets/images/team-logo.png';
+
 // Context
 import {
   Card,
@@ -17,8 +20,9 @@ import {
 import findCard from 'doggo-web-webapp/utilities/find-card';
 
 // Shared Components
-import BigCard from 'doggo-web-webapp/ui/@components/big-card';
-import Modal from 'doggo-web-webapp/ui/@components/modal';
+import BigCardModal from 'doggo-web-webapp/ui/@components/big-card-modal';
+import Logo from 'doggo-web-webapp/ui/@components/logo';
+import Message from 'doggo-web-webapp/ui/@components/message';
 import SmallCard from 'doggo-web-webapp/ui/@components/small-card';
 
 // Elements
@@ -26,10 +30,7 @@ const CardsList = styled.ul`
   min-width: 320px;
   max-width: 800px;
   padding: 0;
-`;
-
-const Message = styled.p`
-  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0;
 `;
 
 // Types
@@ -47,19 +48,20 @@ const enhance = compose<EnhancedProps, Props>(
 
 export class Team extends React.Component<EnhancedProps> {
   public render() {
-    const {cardId, context} = this.props;
-    const {state} = context;
-    const {cards} = state;
+    const {cardId} = this.props;
+    const {cards} = this.props.context.state;
 
     if (!cards) {
       return <Message>Loading...</Message>;
     }
 
-    const selectedCard = cardId ? findCard(cardId, cards) : null;
+    const card = findCard(cardId || '', cards);
+    const selectedCard = card ? card : null;
 
     return (
       <>
-        <Message>Team</Message>
+        <Logo logo={logo} width="120px" marginUnits={0} />
+
         <CardsList>
           {cards.map((card, index) => (
             <SmallCard
@@ -72,9 +74,7 @@ export class Team extends React.Component<EnhancedProps> {
           ))}
         </CardsList>
 
-        <Modal isOpen={!!selectedCard} onClose={this.closeModal}>
-          {selectedCard && <BigCard card={selectedCard} />}
-        </Modal>
+        <BigCardModal card={selectedCard} onClose={this.closeModal} />
       </>
     );
   }

@@ -6,8 +6,13 @@ import styled from 'react-emotion';
 import {Card as CardType} from 'doggo-web-webapp/context';
 
 // Elements
+interface CardProps {
+  isDefeated: boolean;
+}
+
 const CardContainer = styled.li`
   display: flex;
+  opacity: ${({isDefeated}: CardProps) => (isDefeated ? 0.5 : 1)};
   justify-content: space-between;
   width: 400px;
   height: 80px;
@@ -42,10 +47,16 @@ interface Props {
 }
 
 export const SmallCard: React.SFC<Props> = ({card, onCardClick}) => {
-  const {attack, defense, hp, name, image} = card;
+  const {attack, defense, hpLeft, hpTotal, name, image} = card;
+  const isDefeated = hpLeft === 0;
+
+  const cardContainerProps = {
+    isDefeated
+  };
 
   return (
     <CardContainer
+      {...cardContainerProps}
       onClick={() => {
         onCardClick(card);
       }}
@@ -55,7 +66,7 @@ export const SmallCard: React.SFC<Props> = ({card, onCardClick}) => {
       <Info>
         <div>{name}</div>
         <Stats>
-          {hp}
+          {hpLeft}/{hpTotal}
           hp {attack}
           atk {defense}
           def

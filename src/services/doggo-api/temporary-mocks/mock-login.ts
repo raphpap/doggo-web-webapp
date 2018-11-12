@@ -14,7 +14,8 @@ export const mockAlfa = () => ({
     {
       attack: 50,
       defense: 50,
-      hp: 50,
+      hpLeft: 50,
+      hpTotal: 50,
       id: '1',
       image: image_1,
       name: 'Pogger'
@@ -22,7 +23,8 @@ export const mockAlfa = () => ({
     {
       attack: 70,
       defense: 80,
-      hp: 50,
+      hpLeft: 50,
+      hpTotal: 50,
       id: '2',
       image: image_2,
       name: 'El Borko'
@@ -37,7 +39,8 @@ export const mockBravo = () => ({
     {
       attack: 50,
       defense: 100,
-      hp: 70,
+      hpLeft: 70,
+      hpTotal: 70,
       id: '3',
       image: image_3,
       name: 'Blue Eyed White Pupper'
@@ -48,9 +51,10 @@ export const mockBravo = () => ({
 });
 
 export const mockOpponent = () => ({
-  attack: 10,
-  defense: 10,
-  hp: 10,
+  attack: 100,
+  defense: 100,
+  hpLeft: 100,
+  hpTotal: 100,
   id: '99',
   image: image_6,
   name: 'Ronaldoggo'
