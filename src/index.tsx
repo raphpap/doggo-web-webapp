@@ -12,6 +12,7 @@ import Application from 'doggo-web-webapp/ui/application';
 import registerServiceWorker from './registerServiceWorker';
 
 // Styles
+import 'simple-css-reset/reset.css';
 import './index.css';
 
 // Context

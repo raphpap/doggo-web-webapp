@@ -11,16 +11,13 @@ import {
 
 // Shared Components
 import BigCardModal from 'doggo-web-webapp/ui/@components/big-card-modal';
+import Message from 'doggo-web-webapp/ui/@components/message';
 import SmallCard from 'doggo-web-webapp/ui/@components/small-card';
 
 // Components
-import {
-  ActionContainer,
-  CardContainer,
-  CardSelectionButton,
-  Message,
-  ModalCss
-} from './battle.styled';
+import ActionContainer from './action-container';
+import CardContainer from './card-container';
+import CardSelectionButton from './card-selection-button';
 import CardSelectionModal from './card-selection-modal';
 
 // Utilities
@@ -28,11 +25,9 @@ import findCard from 'doggo-web-webapp/utilities/find-card';
 
 // Types
 interface Props {}
-
 type EnhancedProps = Props & WithApplicationContextProps;
 
 interface State {
-  selectedCardId: string | null;
   showCardSelectionModal: boolean;
   showModalCard: Card | null;
 }
@@ -41,15 +36,14 @@ const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 
 export class Battle extends React.Component<EnhancedProps, State> {
   public readonly state: State = {
-    selectedCardId: null,
     showCardSelectionModal: false,
     showModalCard: null
   };
 
   public render() {
-    const {selectedCardId, showCardSelectionModal, showModalCard} = this.state;
+    const {showCardSelectionModal, showModalCard} = this.state;
     const {cards, battle} = this.props.context.state;
-    const {opponent} = battle;
+    const {opponent, cardId: selectedCardId} = battle;
 
     if (!cards || !opponent) return <Message>Loading...</Message>;
 
@@ -116,10 +110,9 @@ export class Battle extends React.Component<EnhancedProps, State> {
   };
 
   private handleCardSelected = (card: Card) => {
-    this.setState({
-      selectedCardId: card.id,
-      showCardSelectionModal: false
-    });
+    const {selectBattleCard} = this.props.context.actions;
+    selectBattleCard(card);
+    this.setState({showCardSelectionModal: false});
   };
 
   private openCardSelectionModal = () => {
