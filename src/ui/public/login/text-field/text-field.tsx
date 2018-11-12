@@ -7,7 +7,7 @@ interface Props {
 }
 
 // Theme
-import theme from 'doggo-web-webapp/theme';
+import theme from 'doggo/theme';
 
 export const TextField = styled.input`
   width: 200px;

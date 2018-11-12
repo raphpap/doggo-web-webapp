@@ -2,7 +2,7 @@
 import './temporary-mocks';
 
 // Configurations
-import {API_KEY, API_URL} from 'doggo-web-webapp/configurations/environment';
+import {API_KEY, API_URL} from 'doggo/configurations/environment';
 
 const isError = (status: number) => status >= 400;
 

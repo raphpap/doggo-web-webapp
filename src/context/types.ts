@@ -1,4 +1,4 @@
-import {ApiError} from 'doggo-web-webapp/services/doggo-api';
+import {ApiError} from 'doggo/services/doggo-api';
 
 export interface ApplicationContext {
   actions: ContextActions;

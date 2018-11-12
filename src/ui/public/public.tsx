@@ -6,8 +6,8 @@ import {compose} from 'recompose';
 import {Route, Switch} from 'react-router-dom';
 
 // Shared components
-import Container from 'doggo-web-webapp/ui/@components/container';
-import Content from 'doggo-web-webapp/ui/@components/content';
+import Container from 'doggo/ui/@components/container';
+import Content from 'doggo/ui/@components/content';
 
 // Components
 import Login from './login';
@@ -16,7 +16,7 @@ import Login from './login';
 import {
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/context';
+} from 'doggo/context';
 
 // Types
 interface Props {}

@@ -10,7 +10,7 @@ import {compose} from 'recompose';
 import {RouteComponentProps} from 'react-router';
 
 // Theme
-import theme from 'doggo-web-webapp/theme';
+import theme from 'doggo/theme';
 
 // Elements
 const Link = styled(NavLink)`

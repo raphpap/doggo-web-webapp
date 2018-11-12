@@ -3,10 +3,10 @@ import React from 'react';
 import styled from 'react-emotion';
 
 // Context
-import {Card} from 'doggo-web-webapp/context';
+import {Card} from 'doggo/context';
 
 // Shared Components
-import SmallCard from 'doggo-web-webapp/ui/@components/small-card';
+import SmallCard from 'doggo/ui/@components/small-card';
 
 // Elements
 const CardsList = styled.ul`

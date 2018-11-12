@@ -12,9 +12,9 @@ import {
 } from 'react-router-dom';
 
 // Shared components
-import Container from 'doggo-web-webapp/ui/@components/container';
-import Content from 'doggo-web-webapp/ui/@components/content';
-import Header from 'doggo-web-webapp/ui/@components/header';
+import Container from 'doggo/ui/@components/container';
+import Content from 'doggo/ui/@components/content';
+import Header from 'doggo/ui/@components/header';
 
 // Components
 import Battle from './battle';
@@ -25,7 +25,7 @@ import Team from './team';
 import {
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/context';
+} from 'doggo/context';
 
 // Types
 interface Props extends RouteComponentProps<never> {}

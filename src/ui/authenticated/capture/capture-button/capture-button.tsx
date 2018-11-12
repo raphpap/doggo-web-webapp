@@ -3,13 +3,13 @@ import React from 'react';
 import styled from 'react-emotion';
 
 // Assets
-import logo from 'doggo-web-webapp/assets/images/capture-logo.png';
+import logo from 'doggo/assets/images/capture-logo.png';
 
 // Theme
-import theme from 'doggo-web-webapp/theme';
+import theme from 'doggo/theme';
 
 // Shared Components
-import Logo from 'doggo-web-webapp/ui/@components/logo';
+import Logo from 'doggo/ui/@components/logo';
 
 // Types
 interface Props {

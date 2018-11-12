@@ -10,7 +10,7 @@ import DoggoAPI, {
   BattleResultData,
   CaptureResultData,
   LoginResultData
-} from 'doggo-web-webapp/services/doggo-api';
+} from 'doggo/services/doggo-api';
 
 // Types
 import {BattleStatus, Card, ContextState} from './types';

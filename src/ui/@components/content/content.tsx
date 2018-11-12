@@ -2,7 +2,7 @@
 import styled from 'react-emotion';
 
 // Theme
-import theme from 'doggo-web-webapp/theme';
+import theme from 'doggo/theme';
 
 export const Content = styled.div`
   box-sizing: border-box;

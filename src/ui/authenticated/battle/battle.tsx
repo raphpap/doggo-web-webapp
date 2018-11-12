@@ -7,12 +7,12 @@ import {
   Card,
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/context';
+} from 'doggo/context';
 
 // Shared Components
-import BigCardModal from 'doggo-web-webapp/ui/@components/big-card-modal';
-import Message from 'doggo-web-webapp/ui/@components/message';
-import SmallCard from 'doggo-web-webapp/ui/@components/small-card';
+import BigCardModal from 'doggo/ui/@components/big-card-modal';
+import Message from 'doggo/ui/@components/message';
+import SmallCard from 'doggo/ui/@components/small-card';
 
 // Components
 import ActionContainer from './action-container';
@@ -21,7 +21,7 @@ import CardSelectionButton from './card-selection-button';
 import CardSelectionModal from './card-selection-modal';
 
 // Utilities
-import findCard from 'doggo-web-webapp/utilities/find-card';
+import findCard from 'doggo/utilities/find-card';
 
 // Types
 interface Props {}

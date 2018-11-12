@@ -2,7 +2,7 @@
 import {Battle, BattleStatus, Card} from '../types';
 
 // Utilities
-import findCard from 'doggo-web-webapp/utilities/find-card';
+import findCard from 'doggo/utilities/find-card';
 
 export const getBattleStatus = (battle: Battle, cards: Card[]) => {
   const selectedCard = findCard(battle.cardId || '', cards);

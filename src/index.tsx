@@ -2,22 +2,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Components
+import Application from 'doggo/ui/application';
+
 // Vendor components
 import {BrowserRouter as Router} from 'react-router-dom';
 
-// Components
-import Application from 'doggo-web-webapp/ui/application';
-
-// Service Worker
-import registerServiceWorker from './registerServiceWorker';
-
 // Styles
 import 'simple-css-reset/reset.css';
-import './index.css';
+
+// Own Styles
+import 'doggo/styles/global.css';
 
 // Context
-import {ApplicationContextProvider} from 'doggo-web-webapp/context';
-import {ThemeContextProvider} from 'doggo-web-webapp/theme';
+import {ApplicationContextProvider} from 'doggo/context';
+import {ThemeContextProvider} from 'doggo/theme';
 
 ReactDOM.render(
   <ThemeContextProvider>
@@ -29,4 +28,3 @@ ReactDOM.render(
   </ThemeContextProvider>,
   document.getElementById('root')
 );
-registerServiceWorker();

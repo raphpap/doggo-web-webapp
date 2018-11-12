@@ -7,23 +7,23 @@ import {compose} from 'recompose';
 import {RouteComponentProps, withRouter} from 'react-router';
 
 // Assets
-import logo from 'doggo-web-webapp/assets/images/team-logo.png';
+import logo from 'doggo/assets/images/team-logo.png';
 
 // Context
 import {
   Card,
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/context';
+} from 'doggo/context';
 
 // Utilities
-import findCard from 'doggo-web-webapp/utilities/find-card';
+import findCard from 'doggo/utilities/find-card';
 
 // Shared Components
-import BigCardModal from 'doggo-web-webapp/ui/@components/big-card-modal';
-import Logo from 'doggo-web-webapp/ui/@components/logo';
-import Message from 'doggo-web-webapp/ui/@components/message';
-import SmallCard from 'doggo-web-webapp/ui/@components/small-card';
+import BigCardModal from 'doggo/ui/@components/big-card-modal';
+import Logo from 'doggo/ui/@components/logo';
+import Message from 'doggo/ui/@components/message';
+import SmallCard from 'doggo/ui/@components/small-card';
 
 // Elements
 const CardsList = styled.ul`

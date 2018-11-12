@@ -2,7 +2,7 @@
 import {CaptureResultData} from '../doggo-api';
 
 // Utilities
-import generateRandomNumber from 'doggo-web-webapp/utilities/generate-random-number';
+import generateRandomNumber from 'doggo/utilities/generate-random-number';
 
 export const mockCapture: (name: string, image: string) => CaptureResultData = (
   name,

@@ -6,14 +6,14 @@ import {compose} from 'recompose';
 import {Route, Switch} from 'react-router-dom';
 
 // Components
-import Authenticated from 'doggo-web-webapp/ui/authenticated';
-import Public from 'doggo-web-webapp/ui/public';
+import Authenticated from 'doggo/ui/authenticated';
+import Public from 'doggo/ui/public';
 
 // Context
 import {
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/context';
+} from 'doggo/context';
 
 // Types
 interface Props {}

@@ -7,11 +7,11 @@ import {compose} from 'recompose';
 import {
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/context';
+} from 'doggo/context';
 
 // Shared Components
-import Message from 'doggo-web-webapp/ui/@components/message';
-import Modal from 'doggo-web-webapp/ui/@components/modal';
+import Message from 'doggo/ui/@components/message';
+import Modal from 'doggo/ui/@components/modal';
 
 // Components
 import CaptureButton from './capture-button';

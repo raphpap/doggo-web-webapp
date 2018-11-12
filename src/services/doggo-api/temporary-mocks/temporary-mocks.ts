@@ -7,7 +7,7 @@ import {mockCapture} from './mock-capture';
 import {mockLogin} from './mock-login';
 
 // Configs
-import {API_KEY, API_URL} from 'doggo-web-webapp/configurations/environment';
+import {API_KEY, API_URL} from 'doggo/configurations/environment';
 
 // Utils
 const sleep = (delayMS: number) => {

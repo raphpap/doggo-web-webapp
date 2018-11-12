@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'react-emotion';
 
 // Context
-import {Card as CardType} from 'doggo-web-webapp/context';
+import {Card as CardType} from 'doggo/context';
 
 // Elements
 const CardContainer = styled.div`

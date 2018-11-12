@@ -6,11 +6,11 @@ import {compose} from 'recompose';
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 
 // Assets
-import logo from 'doggo-web-webapp/assets/images/doggo-logo.png';
+import logo from 'doggo/assets/images/doggo-logo.png';
 
 // Shared components
-import ErrorMessage from 'doggo-web-webapp/ui/@components/error-message';
-import Logo from 'doggo-web-webapp/ui/@components/logo';
+import ErrorMessage from 'doggo/ui/@components/error-message';
+import Logo from 'doggo/ui/@components/logo';
 
 // Components
 import Button from './button';
@@ -21,7 +21,7 @@ import TextField from './text-field';
 import {
   withApplicationContext,
   WithApplicationContextProps
-} from 'doggo-web-webapp/context';
+} from 'doggo/context';
 
 // Types
 interface State {

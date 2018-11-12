@@ -2,7 +2,7 @@
 import React, {ChangeEventHandler, FormEventHandler} from 'react';
 
 // Shared components
-import ErrorMessage from 'doggo-web-webapp/ui/@components/error-message';
+import ErrorMessage from 'doggo/ui/@components/error-message';
 
 // Components
 import Button from './button';

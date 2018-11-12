@@ -2,11 +2,11 @@
 import React from 'react';
 
 // Context
-import {Card as CardType} from 'doggo-web-webapp/context';
+import {Card as CardType} from 'doggo/context';
 
 // Components
-import BigCard from 'doggo-web-webapp/ui/@components/big-card';
-import Modal from 'doggo-web-webapp/ui/@components/modal';
+import BigCard from 'doggo/ui/@components/big-card';
+import Modal from 'doggo/ui/@components/modal';
 
 // Types
 interface Props {
