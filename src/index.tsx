@@ -11,9 +11,6 @@ import {BrowserRouter as Router} from 'react-router-dom';
 // Styles
 import 'simple-css-reset/reset.css';
 
-// Own Styles
-import 'doggo/styles/global.css';
-
 // Context
 import {ApplicationContextProvider} from 'doggo/context';
 import {ThemeContextProvider} from 'doggo/theme';
