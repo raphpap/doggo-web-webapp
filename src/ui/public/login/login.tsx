@@ -11,6 +11,7 @@ import ErrorMessage from 'doggo-web-webapp/ui/@components/error-message';
 // Components
 import Button from './button';
 import Form from './form';
+import Logo from './logo';
 import TextField from './text-field';
 
 // Context
@@ -52,31 +53,35 @@ export class Login extends React.Component<EnhancedProps, State> {
     const {isDirty, username, password} = this.state;
 
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <TextField
-          id="username"
-          error={!isDirty && hasError}
-          placeholder="Username"
-          type="text"
-          value={username}
-          onChange={this.handleUsername}
-        />
+      <>
+        <Logo />
 
-        <TextField
-          id="password"
-          error={!isDirty && hasError}
-          placeholder={'Password'}
-          type="password"
-          value={password}
-          onChange={this.handlePassword}
-        />
+        <Form onSubmit={this.handleSubmit}>
+          <TextField
+            id="username"
+            error={!isDirty && hasError}
+            placeholder="Username"
+            type="text"
+            value={username}
+            onChange={this.handleUsername}
+          />
 
-        {!isDirty && hasError && (
-          <ErrorMessage message="Wrong username and/or password" />
-        )}
+          <TextField
+            id="password"
+            error={!isDirty && hasError}
+            placeholder={'Password'}
+            type="password"
+            value={password}
+            onChange={this.handlePassword}
+          />
 
-        <Button type="submit">Login</Button>
-      </Form>
+          {!isDirty && hasError && (
+            <ErrorMessage message="Wrong username and/or password" />
+          )}
+
+          <Button type="submit">Login</Button>
+        </Form>
+      </>
     );
   }
 
