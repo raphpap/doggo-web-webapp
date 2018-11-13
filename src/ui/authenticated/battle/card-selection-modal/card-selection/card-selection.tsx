@@ -1,19 +1,12 @@
 // Vendor
 import React from 'react';
-import styled from 'react-emotion';
 
 // Context
 import {Card} from 'doggo/context';
 
 // Shared Components
+import CardsContainer from 'doggo/ui/@components/cards-container';
 import SmallCard from 'doggo/ui/@components/small-card';
-
-// Elements
-const CardsList = styled.ul`
-  min-width: 320px;
-  max-width: 800px;
-  padding: 0;
-`;
 
 // Types
 interface Props {
@@ -26,7 +19,7 @@ export class CardSelection extends React.Component<Props> {
     const {cards, onCardSelect} = this.props;
 
     return (
-      <CardsList>
+      <CardsContainer>
         {cards.map((card, index) => (
           <SmallCard
             key={index}
@@ -36,7 +29,7 @@ export class CardSelection extends React.Component<Props> {
             }}
           />
         ))}
-      </CardsList>
+      </CardsContainer>
     );
   }
 }

@@ -1,6 +1,5 @@
 // Vendor
 import React from 'react';
-import styled from 'react-emotion';
 import {compose} from 'recompose';
 
 // Vendor Types
@@ -21,17 +20,10 @@ import findCard from 'doggo/utilities/find-card';
 
 // Shared Components
 import BigCardModal from 'doggo/ui/@components/big-card-modal';
+import CardsContainer from 'doggo/ui/@components/cards-container';
 import Logo from 'doggo/ui/@components/logo';
 import Message from 'doggo/ui/@components/message';
 import SmallCard from 'doggo/ui/@components/small-card';
-
-// Elements
-const CardsList = styled.ul`
-  min-width: 320px;
-  max-width: 800px;
-  padding: 0;
-  margin-top: 0;
-`;
 
 // Types
 interface Props {
@@ -60,9 +52,9 @@ export class Team extends React.Component<EnhancedProps> {
 
     return (
       <>
-        <Logo logo={logo} width="120px" marginUnits={0} />
+        <Logo logo={logo} height={'80px'} marginUnits={0} />
 
-        <CardsList>
+        <CardsContainer>
           {cards.map((card, index) => (
             <SmallCard
               key={index}
@@ -72,7 +64,7 @@ export class Team extends React.Component<EnhancedProps> {
               }}
             />
           ))}
-        </CardsList>
+        </CardsContainer>
 
         <BigCardModal card={selectedCard} onClose={this.closeModal} />
       </>

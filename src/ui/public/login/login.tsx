@@ -57,7 +57,7 @@ export class Login extends React.Component<EnhancedProps, State> {
 
     return (
       <>
-        <Logo logo={logo} marginUnits={5} />
+        <Logo logo={logo} marginUnits={5} height={'180px'} />
 
         <Form onSubmit={this.handleSubmit}>
           <TextField

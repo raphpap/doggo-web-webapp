@@ -10,6 +10,7 @@ export interface ContextActions {
   capture: (name: string, image: string) => void;
   login: (username: string, password: string) => void;
   selectBattleCard: (card: Card) => void;
+  unselectBattleCard: () => void;
 }
 
 export interface ContextState {

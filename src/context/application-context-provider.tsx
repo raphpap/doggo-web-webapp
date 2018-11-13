@@ -85,7 +85,19 @@ const handleSelectCard = (card: Card) => (state: ContextState) => {
     ...state,
     battle: {
       ...state.battle,
-      cardId: card.id
+      cardId: card.id,
+      status: BattleStatus.Ready
+    }
+  };
+};
+
+const handleUnselectCard = () => (state: ContextState) => {
+  return {
+    ...state,
+    battle: {
+      ...state.battle,
+      cardId: null,
+      status: BattleStatus.NoCardSelected
     }
   };
 };
@@ -122,7 +134,8 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
             battle: this.battle,
             capture: this.capture,
             login: this.login,
-            selectBattleCard: this.selectBattleCard
+            selectBattleCard: this.selectBattleCard,
+            unselectBattleCard: this.unselectBattleCard
           },
           state: {...this.state}
         }}
@@ -170,5 +183,9 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
 
   private selectBattleCard = async (card: Card) => {
     this.setState(handleSelectCard(card));
+  };
+
+  private unselectBattleCard = async () => {
+    this.setState(handleUnselectCard());
   };
 }

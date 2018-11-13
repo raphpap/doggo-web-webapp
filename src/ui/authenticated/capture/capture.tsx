@@ -3,6 +3,9 @@ import React from 'react';
 import Webcam from 'react-webcam';
 import {compose} from 'recompose';
 
+// Assets
+import logo from 'doggo/assets/images/capture-logo.png';
+
 // Context
 import {
   withApplicationContext,
@@ -12,9 +15,10 @@ import {
 // Shared Components
 import Message from 'doggo/ui/@components/message';
 import Modal from 'doggo/ui/@components/modal';
+import PrettyButton from 'doggo/ui/@components/pretty-button';
 
 // Components
-import CaptureButton from './capture-button';
+import CaptureButtonContainer from './capture-button-container';
 import Form from './form';
 import HiddenWebcamContainer from './hidden-webcam-container';
 import WebcamContainer from './webcam-container';
@@ -78,9 +82,11 @@ export class Capture extends React.Component<EnhancedProps, State> {
             />
 
             {!disableCapture && !capturedImageSrc && (
-              <CaptureButton onClick={this.onCaptureClicked}>
-                Capture
-              </CaptureButton>
+              <CaptureButtonContainer>
+                <PrettyButton logo={logo} onClick={this.onCaptureClicked}>
+                  Capture
+                </PrettyButton>
+              </CaptureButtonContainer>
             )}
           </WebcamContainer>
 

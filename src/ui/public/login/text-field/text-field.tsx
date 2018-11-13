@@ -1,17 +1,17 @@
 // Vendor
 import styled from 'react-emotion';
 
+// Theme
+import theme from 'doggo/theme';
+
 // Types
 interface Props {
   error?: boolean;
 }
 
-// Theme
-import theme from 'doggo/theme';
-
 export const TextField = styled.input`
   width: 200px;
-  height: 20px;
+  height: 40px;
   padding: ${theme.padding.unit}px;
   border: 2px solid;
   border-color: ${({error}: Props) =>
