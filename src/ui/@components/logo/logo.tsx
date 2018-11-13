@@ -8,7 +8,7 @@ import theme from 'doggo/theme';
 interface LogoProps {
   logo: string;
   marginUnits?: number;
-  width?: string;
+  height?: string;
 }
 
 const getMargin = (nbUnits: number, unitValue: number) => {
@@ -17,9 +17,9 @@ const getMargin = (nbUnits: number, unitValue: number) => {
 
 export const LogoComponent = styled.img`
   display: block;
-  width: ${({width}: LogoProps) => (width ? width : '100%')};
+  width: auto;
   max-width: 440px;
-  height: auto;
+  height: ${({height}: LogoProps) => (height ? height : '100%')};
   margin: ${({marginUnits}: LogoProps) =>
     getMargin(marginUnits || 1, theme.margin.unit)};
 `;

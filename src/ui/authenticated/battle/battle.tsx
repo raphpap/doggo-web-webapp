@@ -12,13 +12,13 @@ import {
 // Shared Components
 import BigCardModal from 'doggo/ui/@components/big-card-modal';
 import Message from 'doggo/ui/@components/message';
-import SmallCard from 'doggo/ui/@components/small-card';
 
 // Components
-import ActionContainer from './action-container';
-import CardContainer from './card-container';
-import CardSelectionButton from './card-selection-button';
 import CardSelectionModal from './card-selection-modal';
+import Container from './container';
+import NextBattleAction from './next-battle-action';
+import OpponentCard from './opponent-card';
+import OwnCard from './own-card';
 
 // Utilities
 import findCard from 'doggo/utilities/find-card';
@@ -47,51 +47,35 @@ export class Battle extends React.Component<EnhancedProps, State> {
 
     if (!cards || !opponent) return <Message>Loading...</Message>;
 
-    const selectedCard = findCard(selectedCardId || '', cards);
+    const selectedCard = findCard(selectedCardId || '', cards) || null;
 
     return (
       <>
-        <Message>Battle</Message>
-
-        <CardContainer>
-          <SmallCard
-            card={opponent}
-            onCardClick={(card: Card) => this.openCardModal(card)}
+        <Container>
+          <OpponentCard
+            opponentCard={opponent}
+            onCardClick={this.openCardModal}
           />
-        </CardContainer>
 
-        <div>
-          {selectedCard ? (
-            <ActionContainer onClick={() => this.onBattleClicked(selectedCard)}>
-              Battle!
-            </ActionContainer>
-          ) : (
-            <ActionContainer>VS</ActionContainer>
-          )}
-        </div>
+          <NextBattleAction
+            ownCard={selectedCard}
+            battleStatus={battle.status}
+            onBattleClicked={this.handleBattleClicked}
+            onNextAfterLost={this.handleNextAfterLost}
+          />
 
-        {selectedCard ? (
-          <CardContainer>
-            <SmallCard
-              card={selectedCard}
-              onCardClick={(card: Card) => this.openCardModal(card)}
-            />
-          </CardContainer>
-        ) : (
-          <div>
-            <CardSelectionButton onClick={this.openCardSelectionModal}>
-              Choose your fighter
-            </CardSelectionButton>
-          </div>
-        )}
+          <OwnCard
+            ownCard={selectedCard}
+            onCardClick={this.openCardModal}
+            onCardSelectionClick={this.openCardSelectionModal}
+          />
+        </Container>
 
         <CardSelectionModal
           isOpen={showCardSelectionModal}
           onClose={this.closeCardSelectionModal}
           cards={cards}
-          onCardSelect={(card: Card) => {
-            this.handleCardSelected(card);
-          }}
+          onCardSelect={this.handleCardSelected}
         />
 
         <BigCardModal card={showModalCard} onClose={this.closeCardModal} />
@@ -99,7 +83,12 @@ export class Battle extends React.Component<EnhancedProps, State> {
     );
   }
 
-  private onBattleClicked = (selectedCard: Card) => {
+  private handleNextAfterLost = () => {
+    const {unselectBattleCard} = this.props.context.actions;
+    unselectBattleCard();
+  };
+
+  private handleBattleClicked = (selectedCard: Card) => {
     const {battle: battleAction} = this.props.context.actions;
     const {battle} = this.props.context.state;
     const {opponent} = battle;

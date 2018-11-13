@@ -1,20 +1,14 @@
 // Vendor
 import React from 'react';
-import styled from 'react-emotion';
 
 // Context
 import {Card} from 'doggo/context';
 
 // Shared Components
 import Modal from 'doggo/ui/@components/modal';
-import SmallCard from 'doggo/ui/@components/small-card';
 
-// Elements
-const CardsList = styled.ul`
-  min-width: 320px;
-  max-width: 800px;
-  padding: 0;
-`;
+// Component
+import CardSelection from './card-selection';
 
 // Types
 interface Props {
@@ -24,26 +18,16 @@ interface Props {
   onClose: () => void;
 }
 
-export class CardSelection extends React.Component<Props> {
+export class CardSelectionModal extends React.Component<Props> {
   public render() {
     const {cards, isOpen, onCardSelect, onClose} = this.props;
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <CardsList>
-          {cards.map((card, index) => (
-            <SmallCard
-              key={index}
-              card={card}
-              onCardClick={(card: Card) => {
-                onCardSelect(card);
-              }}
-            />
-          ))}
-        </CardsList>
+        <CardSelection cards={cards} onCardSelect={onCardSelect} />
       </Modal>
     );
   }
 }
 
-export default CardSelection;
+export default CardSelectionModal;

@@ -10,8 +10,8 @@ interface Props {
 import theme from 'doggo/theme';
 
 export const TextField = styled.input`
-  width: calc(100% - 20px);
-  height: 20px;
+  width: 100%;
+  height: 40px;
   padding: ${theme.padding.unit}px;
   border: 2px solid;
   border-color: ${({error}: Props) =>

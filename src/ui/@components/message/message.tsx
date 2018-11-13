@@ -5,6 +5,7 @@ import styled from 'react-emotion';
 import theme from 'doggo/theme';
 
 export const Message = styled.p`
+  padding: ${theme.padding.unit}px;
   color: ${theme.colors.white.transparent};
 `;
 
