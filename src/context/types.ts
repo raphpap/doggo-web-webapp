@@ -8,6 +8,7 @@ export interface ApplicationContext {
 export interface ContextActions {
   battle: (ownCard: Card, opponentCard: Card) => void;
   capture: (name: string, image: string) => void;
+  getNextOpponent: (opponentCard: Card) => void;
   login: (username: string, password: string) => void;
   selectBattleCard: (card: Card) => void;
   unselectBattleCard: () => void;

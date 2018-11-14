@@ -40,6 +40,10 @@ export interface BattleResult extends ApiResult {
   data?: BattleResultData;
 }
 
+export interface NextOpponentResult extends ApiResult {
+  data?: NextOpponentResultData;
+}
+
 export interface LoginResultData {
   cards: Card[];
   username: string;
@@ -52,6 +56,10 @@ export interface CaptureResultData {
 
 export interface BattleResultData {
   card: Card;
+  opponent: Card;
+}
+
+export interface NextOpponentResultData {
   opponent: Card;
 }
 
@@ -79,6 +87,10 @@ export class DoggoAPI {
     opponentCard: Card
   ): Promise<BattleResult> => {
     return this.post('/battle', {ownCard, opponentCard});
+  };
+
+  public nextOpponent = (opponentCard: Card): Promise<NextOpponentResult> => {
+    return this.post('/next-opponent', {opponentCard});
   };
 
   private post(

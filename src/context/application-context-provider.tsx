@@ -9,7 +9,8 @@ import DoggoAPI, {
   ApiError,
   BattleResultData,
   CaptureResultData,
-  LoginResultData
+  LoginResultData,
+  NextOpponentResultData
 } from 'doggo/services/doggo-api';
 
 // Types
@@ -102,6 +103,19 @@ const handleUnselectCard = () => (state: ContextState) => {
   };
 };
 
+const handleGetNextOpponentSuccess = ({opponent}: NextOpponentResultData) => (
+  state: ContextState
+) => {
+  return {
+    ...state,
+    battle: {
+      ...state.battle,
+      opponent,
+      status: BattleStatus.Ready
+    }
+  };
+};
+
 const handleBattleSuccess = ({card, opponent}: BattleResultData) => (
   state: ContextState
 ) => {
@@ -133,6 +147,7 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
           actions: {
             battle: this.battle,
             capture: this.capture,
+            getNextOpponent: this.getNextOpponent,
             login: this.login,
             selectBattleCard: this.selectBattleCard,
             unselectBattleCard: this.unselectBattleCard
@@ -187,5 +202,17 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
 
   private unselectBattleCard = async () => {
     this.setState(handleUnselectCard());
+  };
+
+  private getNextOpponent = async (opponentCard: Card) => {
+    this.setState(handleCallPending());
+
+    const {data, error} = await DoggoAPI.nextOpponent(opponentCard);
+
+    if (error) {
+      this.setState(handleCallFailure(error));
+    } else {
+      this.setState(handleGetNextOpponentSuccess(data!));
+    }
   };
 }

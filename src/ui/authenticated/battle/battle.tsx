@@ -50,7 +50,7 @@ export class Battle extends React.Component<EnhancedProps, State> {
     const selectedCard = findCard(selectedCardId || '', cards) || null;
 
     return (
-      <>
+      <div>
         <Container>
           <OpponentCard
             opponentCard={opponent}
@@ -62,6 +62,7 @@ export class Battle extends React.Component<EnhancedProps, State> {
             battleStatus={battle.status}
             onBattleClicked={this.handleBattleClicked}
             onNextAfterLost={this.handleNextAfterLost}
+            onNextAfterWin={this.handleNextAfterWin}
           />
 
           <OwnCard
@@ -79,13 +80,22 @@ export class Battle extends React.Component<EnhancedProps, State> {
         />
 
         <BigCardModal card={showModalCard} onClose={this.closeCardModal} />
-      </>
+      </div>
     );
   }
 
   private handleNextAfterLost = () => {
     const {unselectBattleCard} = this.props.context.actions;
     unselectBattleCard();
+  };
+
+  private handleNextAfterWin = () => {
+    const {opponent} = this.props.context.state.battle;
+    const {getNextOpponent} = this.props.context.actions;
+
+    if (opponent) {
+      getNextOpponent(opponent);
+    }
   };
 
   private handleBattleClicked = (selectedCard: Card) => {

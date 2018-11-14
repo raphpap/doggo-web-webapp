@@ -5,6 +5,7 @@ import fetchMock from 'fetch-mock';
 import {mockBattle} from './mock-battle';
 import {mockCapture} from './mock-capture';
 import {mockLogin} from './mock-login';
+import {mockNextOpponent} from './mock-next-opponent';
 
 // Configs
 import {API_KEY, API_URL} from 'doggo/configurations/environment';
@@ -49,5 +50,17 @@ fetchMock.mock({
     const {ownCard, opponentCard} = JSON.parse(body as string);
     await sleep(200);
     return mockBattle(ownCard, opponentCard);
+  }
+});
+
+fetchMock.mock({
+  headers: {'X-API-Key': API_KEY},
+  matcher: `${API_URL}/next-opponent`,
+  method: 'POST',
+  response: async (_url: string, opts: RequestInit) => {
+    const {body} = opts;
+    const {opponentCard} = JSON.parse(body as string);
+    await sleep(200);
+    return mockNextOpponent(opponentCard);
   }
 });

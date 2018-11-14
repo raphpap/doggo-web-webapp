@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-height: 800px;
+  height: 600px;
   padding: ${theme.padding.unit * 4}px 0;
 `;
 

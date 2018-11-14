@@ -8,6 +8,7 @@ const defaultValue: ApplicationContext = {
   actions: {
     battle: (ownCard: Card, opponentCard: Card) => Promise.reject(),
     capture: (name: string, image: string) => Promise.reject(),
+    getNextOpponent: (opponentCard: Card) => Promise.reject(),
     login: (username: string, password: string) => Promise.reject(),
     selectBattleCard: (card: Card) => Promise.reject(),
     unselectBattleCard: () => Promise.reject()

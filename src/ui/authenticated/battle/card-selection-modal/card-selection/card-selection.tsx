@@ -24,6 +24,7 @@ export class CardSelection extends React.Component<Props> {
           <SmallCard
             key={index}
             card={card}
+            isNotClickable={card.hpLeft <= 0}
             onCardClick={(card: Card) => {
               onCardSelect(card);
             }}
