@@ -6,11 +6,11 @@ export const mockBattle: (
   opponentCard: Card
 ) => BattleResultData = (ownCard, opponentCard) => {
   let damageOnSelfPerTurn = opponentCard.attack - ownCard.defense;
-  damageOnSelfPerTurn = damageOnSelfPerTurn < 0 ? 10 : damageOnSelfPerTurn;
+  damageOnSelfPerTurn = damageOnSelfPerTurn <= 0 ? 10 : damageOnSelfPerTurn;
 
   let damageOnOpponentPerTurn = ownCard.attack - opponentCard.defense;
   damageOnOpponentPerTurn =
-    damageOnOpponentPerTurn < 0 ? 10 : damageOnOpponentPerTurn;
+    damageOnOpponentPerTurn <= 0 ? 10 : damageOnOpponentPerTurn;
 
   let ownHpLeft = ownCard.hpLeft;
   let opponentHpLeft = opponentCard.hpLeft;
