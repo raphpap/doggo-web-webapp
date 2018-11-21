@@ -5,6 +5,12 @@ import styled from 'react-emotion';
 // Context
 import {Card as CardType} from 'doggo/context';
 
+// Theme
+import theme from 'doggo/theme';
+
+// Shared Elements
+import HealthBar from 'doggo/ui/@components/health-bar';
+
 // Elements
 interface CardProps {
   isDefeated: boolean;
@@ -16,8 +22,9 @@ const CardContainer = styled.li`
   opacity: ${({isDefeated}: CardProps) => (isDefeated ? 0.5 : 1)};
   justify-content: space-between;
   width: 400px;
-  height: 80px;
+  height: 100px;
   border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
   margin: 8px;
   cursor: ${({isClickable}: CardProps) =>
     isClickable ? 'pointer' : 'not-allowed'};
@@ -27,6 +34,12 @@ const Image = styled.img`
   display: block;
   width: auto;
   height: 100%;
+  border-radius: 8px;
+`;
+
+const Name = styled.div`
+  padding-bottom: ${theme.padding.unit}px;
+  font-size: 18px;
 `;
 
 const Info = styled.div`
@@ -39,7 +52,11 @@ const Info = styled.div`
 `;
 
 const Stats = styled.div`
-  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: ${theme.padding.unit / 2}px;
+  font-size: 14px;
 `;
 
 // Types
@@ -64,12 +81,13 @@ export class SmallCard extends React.Component<Props> {
         <Image src={image} />
 
         <Info>
-          <div>{name}</div>
+          <Name>{name}</Name>
+
+          <HealthBar hpLeft={hpLeft} hpTotal={hpTotal} />
+
           <Stats>
-            {hpLeft}/{hpTotal}
-            hp {attack}
-            atk {defense}
-            def
+            <div>Atk: {attack}</div>
+            <div>Def: {defense}</div>
           </Stats>
         </Info>
       </CardContainer>

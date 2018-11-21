@@ -5,17 +5,31 @@ import styled from 'react-emotion';
 // Context
 import {Card as CardType} from 'doggo/context';
 
+// Theme
+import theme from 'doggo/theme';
+
+// Shared Components
+import HealthBar from 'doggo/ui/@components/health-bar';
+import {StatDonut, StatType} from 'doggo/ui/@components/stat-donut';
+
 // Elements
 const CardContainer = styled.div`
   width: 300px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
   margin: 8px;
+`;
+
+const Name = styled.div`
+  padding-bottom: ${theme.padding.unit * 3}px;
+  text-align: center;
+  font-size: 32px;
+  color: rgba(255, 255, 255, 0.8);
 `;
 
 const Image = styled.img`
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 8px;
 `;
 
 const Info = styled.div`
@@ -23,12 +37,14 @@ const Info = styled.div`
   flex: 1 1 auto;
   flex-direction: column;
   justify-content: space-around;
-  padding: 8px 24px;
+  padding: ${theme.padding.unit}px ${theme.padding.unit * 3}px;
   color: rgba(255, 255, 255, 0.8);
 `;
 
 const Stats = styled.div`
-  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: space-between;
+  height: 120px;
 `;
 
 // Types
@@ -41,15 +57,17 @@ export const BigCard: React.SFC<Props> = ({card}) => {
 
   return (
     <CardContainer>
+      <Name>{name}</Name>
+
       <Image src={image} />
 
       <Info>
-        <div>{name}</div>
+        <HealthBar hpLeft={hpLeft} hpTotal={hpTotal} />
+
         <Stats>
-          {hpLeft}/{hpTotal}
-          hp {attack}
-          atk {defense}
-          def
+          <StatDonut percentage={attack} statType={StatType.Attack} />
+
+          <StatDonut percentage={defense} statType={StatType.Defense} />
         </Stats>
       </Info>
     </CardContainer>

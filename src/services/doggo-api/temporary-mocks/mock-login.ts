@@ -12,19 +12,19 @@ export enum Users {
 export const mockAlfa = () => ({
   cards: [
     {
-      attack: 50,
-      defense: 50,
-      hpLeft: 50,
-      hpTotal: 50,
+      attack: 75,
+      defense: 75,
+      hpLeft: 800,
+      hpTotal: 800,
       id: '1',
       image: image_1,
       name: 'Pogger'
     },
     {
-      attack: 70,
-      defense: 80,
-      hpLeft: 50,
-      hpTotal: 50,
+      attack: 75,
+      defense: 65,
+      hpLeft: 800,
+      hpTotal: 800,
       id: '2',
       image: image_2,
       name: 'El Borko'
@@ -39,8 +39,8 @@ export const mockBravo = () => ({
     {
       attack: 50,
       defense: 100,
-      hpLeft: 70,
-      hpTotal: 70,
+      hpLeft: 700,
+      hpTotal: 700,
       id: '3',
       image: image_3,
       name: 'Blue Eyed White Pupper'
@@ -51,10 +51,10 @@ export const mockBravo = () => ({
 });
 
 export const mockOpponent = () => ({
-  attack: 100,
-  defense: 100,
-  hpLeft: 100,
-  hpTotal: 100,
+  attack: 90,
+  defense: 95,
+  hpLeft: 1000,
+  hpTotal: 1000,
   id: '99',
   image: image_6,
   name: 'Ronaldoggo'

@@ -8,7 +8,7 @@ export const mockCapture: (name: string, image: string) => CaptureResultData = (
   name,
   image
 ) => {
-  const hp = generateRandomNumber(20, 50) * 10;
+  const hp = generateRandomNumber(40, 100) * 10;
 
   return {
     card: {
