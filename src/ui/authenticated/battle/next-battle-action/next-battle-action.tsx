@@ -13,6 +13,7 @@ import PrettyButton from 'doggo/ui/@components/pretty-button';
 
 // Components
 import ActionContainer from './action-container';
+import BattleAnimation from './battle-animation';
 import ContinueButton from './continue-button';
 
 // Context
@@ -54,7 +55,7 @@ export class NextBattleAction extends React.Component<Props> {
           />
         )}
 
-        {battleStatus === BattleStatus.Ongoing && <Message>Loading...</Message>}
+        {battleStatus === BattleStatus.Ongoing && <BattleAnimation />}
 
         {battleStatus === BattleStatus.Won && (
           <div>
