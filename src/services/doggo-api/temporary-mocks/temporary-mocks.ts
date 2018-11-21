@@ -48,7 +48,7 @@ fetchMock.mock({
   response: async (_url: string, opts: RequestInit) => {
     const {body} = opts;
     const {ownCard, opponentCard} = JSON.parse(body as string);
-    await sleep(200);
+    await sleep(4000);
     return mockBattle(ownCard, opponentCard);
   }
 });
