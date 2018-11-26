@@ -36,11 +36,11 @@ const Container = styled.div`
 
 const BorkComponent = styled.div`
   position: absolute;
-  color: ${theme.colors.white.plain};
   top: ${({yPosition}: BorkCopmonentProps) => yPosition}%;
   left: ${({xPosition}: BorkCopmonentProps) => xPosition}%;
   transform: rotate(${({rotation}: BorkCopmonentProps) => rotation}deg);
   font-size: ${({fontSize}: BorkCopmonentProps) => fontSize}px;
+  color: ${theme.colors.white.plain};
 `;
 
 // Types
@@ -72,7 +72,7 @@ export class BattleAnimation extends React.Component<{}, State> {
     }, 100);
   }
 
-  public componentDidUnmount() {
+  public componentWillUnmount() {
     window.clearInterval(this.timer);
   }
 

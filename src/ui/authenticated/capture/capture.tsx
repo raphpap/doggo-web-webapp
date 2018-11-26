@@ -144,7 +144,7 @@ export class Capture extends React.Component<EnhancedProps, State> {
 
   private handleSubmit = (cardName: string, imageSrc: string) => {
     const {capture} = this.props.context.actions;
-    capture(cardName, imageSrc);
+    capture({name: cardName, image: imageSrc});
     this.closeModal();
   };
 }

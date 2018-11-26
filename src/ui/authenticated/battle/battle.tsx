@@ -94,7 +94,7 @@ export class Battle extends React.Component<EnhancedProps, State> {
     const {getNextOpponent} = this.props.context.actions;
 
     if (opponent) {
-      getNextOpponent(opponent);
+      getNextOpponent({card: opponent});
     }
   };
 
@@ -104,7 +104,7 @@ export class Battle extends React.Component<EnhancedProps, State> {
     const {opponent} = battle;
 
     if (selectedCard && opponent) {
-      battleAction(selectedCard, opponent);
+      battleAction({ownCard: selectedCard, opponentCard: opponent});
     }
   };
 
