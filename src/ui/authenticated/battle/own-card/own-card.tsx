@@ -27,11 +27,9 @@ export class OwnCard extends React.Component<Props> {
         <SmallCard card={ownCard} onCardClick={onCardClick} />
       </CardsContainer>
     ) : (
-      <div>
-        <CardSelectionButton onClick={onCardSelectionClick}>
-          Choose your fighter
-        </CardSelectionButton>
-      </div>
+      <CardSelectionButton onClick={onCardSelectionClick}>
+        Choose your fighter
+      </CardSelectionButton>
     );
   }
 }

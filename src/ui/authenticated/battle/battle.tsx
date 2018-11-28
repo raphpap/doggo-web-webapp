@@ -1,5 +1,6 @@
 // Vendor
 import React from 'react';
+import styled from 'react-emotion';
 import {compose} from 'recompose';
 
 // Context
@@ -22,6 +23,11 @@ import OwnCard from './own-card';
 
 // Utilities
 import findCard from 'doggo/utilities/find-card';
+
+// Elements
+const Wrapper = styled.div`
+  width: 100%;
+`;
 
 // Types
 interface Props {}
@@ -50,7 +56,7 @@ export class Battle extends React.Component<EnhancedProps, State> {
     const selectedCard = findCard(selectedCardId || '', cards) || null;
 
     return (
-      <div>
+      <Wrapper>
         <Container>
           <OpponentCard
             opponentCard={opponent}
@@ -80,7 +86,7 @@ export class Battle extends React.Component<EnhancedProps, State> {
         />
 
         <BigCardModal card={showModalCard} onClose={this.closeCardModal} />
-      </div>
+      </Wrapper>
     );
   }
 

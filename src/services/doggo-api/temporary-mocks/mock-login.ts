@@ -2,7 +2,7 @@
 import image_1 from './dogs/dog_1';
 import image_2 from './dogs/dog_2';
 import image_3 from './dogs/dog_3';
-import image_6 from './dogs/dog_6';
+import image_4 from './dogs/dog_4';
 
 export enum Users {
   Alfa = 'alfa',
@@ -51,13 +51,13 @@ export const mockBravo = () => ({
 });
 
 export const mockOpponent = () => ({
-  attack: 90,
-  defense: 95,
-  hpLeft: 1000,
-  hpTotal: 1000,
-  id: '99',
-  image: image_6,
-  name: 'Ronaldoggo'
+  attack: 50,
+  defense: 100,
+  hpLeft: 70,
+  hpTotal: 70,
+  id: '97',
+  image: image_4,
+  name: 'King Karl'
 });
 
 export const mockError = () => ({

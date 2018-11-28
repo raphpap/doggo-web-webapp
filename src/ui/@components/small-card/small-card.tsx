@@ -21,11 +21,11 @@ const CardContainer = styled.li`
   display: flex;
   opacity: ${({isDefeated}: CardProps) => (isDefeated ? 0.5 : 1)};
   justify-content: space-between;
-  width: 400px;
+  width: 100%;
   height: 100px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 8px;
-  margin: 8px;
+  margin-bottom: 16px;
   cursor: ${({isClickable}: CardProps) =>
     isClickable ? 'pointer' : 'not-allowed'};
 `;

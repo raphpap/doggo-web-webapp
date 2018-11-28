@@ -30,17 +30,21 @@ interface BorkCopmonentProps {
 
 const Container = styled.div`
   position: relative;
-  width: 400px;
+  width: 300px;
   height: 100%;
+
+  @media screen and (min-width: 480px) {
+    width: 450px;
+  }
 `;
 
 const BorkComponent = styled.div`
   position: absolute;
-  color: ${theme.colors.white.plain};
   top: ${({yPosition}: BorkCopmonentProps) => yPosition}%;
   left: ${({xPosition}: BorkCopmonentProps) => xPosition}%;
   transform: rotate(${({rotation}: BorkCopmonentProps) => rotation}deg);
   font-size: ${({fontSize}: BorkCopmonentProps) => fontSize}px;
+  color: ${theme.colors.white.plain};
 `;
 
 // Types

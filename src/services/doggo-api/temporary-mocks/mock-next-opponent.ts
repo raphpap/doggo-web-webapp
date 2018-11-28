@@ -4,11 +4,37 @@ import {Card, NextOpponentResultData} from '../doggo-api';
 import image_1 from './dogs/dog_1';
 import image_2 from './dogs/dog_2';
 import image_3 from './dogs/dog_3';
-import image_4 from './dogs/dog_4';
 import image_5 from './dogs/dog_5';
 import image_6 from './dogs/dog_6';
 
 const opponents: Card[] = [
+  {
+    attack: 50,
+    defense: 100,
+    hpLeft: 500,
+    hpTotal: 500,
+    id: '96',
+    image: image_3,
+    name: 'Blue Eyed White Pupper'
+  },
+  {
+    attack: 50,
+    defense: 100,
+    hpLeft: 500,
+    hpTotal: 500,
+    id: '98',
+    image: image_5,
+    name: 'Tiny Tank'
+  },
+  {
+    attack: 90,
+    defense: 95,
+    hpLeft: 1000,
+    hpTotal: 1000,
+    id: '99',
+    image: image_6,
+    name: 'Ronaldoggo'
+  },
   {
     attack: 50,
     defense: 50,
@@ -26,42 +52,6 @@ const opponents: Card[] = [
     id: '95',
     image: image_2,
     name: 'El Borko'
-  },
-  {
-    attack: 50,
-    defense: 100,
-    hpLeft: 70,
-    hpTotal: 70,
-    id: '96',
-    image: image_3,
-    name: 'Blue Eyed White Pupper'
-  },
-  {
-    attack: 50,
-    defense: 100,
-    hpLeft: 70,
-    hpTotal: 70,
-    id: '97',
-    image: image_4,
-    name: 'Blue Eyed White Pupper'
-  },
-  {
-    attack: 50,
-    defense: 100,
-    hpLeft: 70,
-    hpTotal: 70,
-    id: '98',
-    image: image_5,
-    name: 'Blue Eyed White Pupper'
-  },
-  {
-    attack: 100,
-    defense: 100,
-    hpLeft: 100,
-    hpTotal: 100,
-    id: '99',
-    image: image_6,
-    name: 'Ronaldoggo'
   }
 ];
 
