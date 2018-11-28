@@ -3,6 +3,9 @@ import {Theme} from './types';
 
 // Default theme
 export const theme: Theme = {
+  breakpoints: {
+    medium: 480
+  },
   colors: {
     error: '#c00',
     grey: {

@@ -4,6 +4,9 @@ export interface ThemeContext {
 }
 
 export interface Theme {
+  breakpoints: {
+    medium: number;
+  };
   colors: {
     error: string;
     grey: {

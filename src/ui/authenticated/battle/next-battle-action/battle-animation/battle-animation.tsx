@@ -33,7 +33,7 @@ const Container = styled.div`
   width: 300px;
   height: 100%;
 
-  @media screen and (min-width: 480px) {
+  @media screen and (min-width: ${theme.breakpoints.medium}px) {
     width: 450px;
   }
 `;

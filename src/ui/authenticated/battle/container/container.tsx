@@ -13,7 +13,7 @@ export const Container = styled.div`
   height: 540px;
   padding: ${theme.padding.unit * 4}px 0;
 
-  @media screen and (min-width: 480px) {
+  @media screen and (min-width: ${theme.breakpoints.medium}px) {
     height: 640px;
   }
 `;
