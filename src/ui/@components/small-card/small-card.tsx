@@ -47,8 +47,8 @@ const Info = styled.div`
   flex: 1 1 auto;
   flex-direction: column;
   justify-content: space-around;
-  padding: 8px 24px;
-  color: rgba(255, 255, 255, 0.8);
+  padding: ${theme.padding.unit}px ${theme.padding.unit * 3}px;
+  color: ${theme.colors.white.transparent};
 `;
 
 const Stats = styled.div`

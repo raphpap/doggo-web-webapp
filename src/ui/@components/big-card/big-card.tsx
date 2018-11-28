@@ -22,7 +22,7 @@ const Name = styled.div`
   padding-bottom: ${theme.padding.unit * 3}px;
   text-align: center;
   font-size: 32px;
-  color: rgba(255, 255, 255, 0.8);
+  color: ${theme.colors.white.transparent};
 `;
 
 const Image = styled.img`
@@ -38,7 +38,7 @@ const Info = styled.div`
   flex-direction: column;
   justify-content: space-around;
   padding: ${theme.padding.unit}px ${theme.padding.unit * 3}px;
-  color: rgba(255, 255, 255, 0.8);
+  color: ${theme.colors.white.transparent};
 `;
 
 const Stats = styled.div`

@@ -67,7 +67,7 @@ export class Authenticated extends Component<EnhancedProps> {
                 <Team cardId={match.params.cardId as string} />
               )}
             />
-            <Route path="/team" render={() => <Team />} />
+            <Route path="/team" component={Team} />
             <Route path="/battle" component={Battle} />
             <Route component={Capture} />
           </Switch>

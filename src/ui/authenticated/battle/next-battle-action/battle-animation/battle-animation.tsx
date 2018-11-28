@@ -76,7 +76,7 @@ export class BattleAnimation extends React.Component<{}, State> {
     }, 100);
   }
 
-  public componentDidUnmount() {
+  public componentWillUnmount() {
     window.clearInterval(this.timer);
   }
 

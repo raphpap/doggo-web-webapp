@@ -1,17 +1,20 @@
 // Vendor
 import React from 'react';
 
+// Theme
+import theme from 'doggo/theme';
+
 // Vendor Components
 import Modal from 'react-responsive-modal';
 
 // Css
 const ModalCss = {
   closeIcon: {
-    fill: 'rgba(255, 255, 255, 0.8)'
+    fill: theme.colors.white.transparent
   },
   modal: {
-    backgroundColor: '#171820',
-    paddingTop: '40px'
+    backgroundColor: theme.colors.grey.grey60,
+    paddingTop: `${theme.padding.unit * 5}px`
   }
 };
 

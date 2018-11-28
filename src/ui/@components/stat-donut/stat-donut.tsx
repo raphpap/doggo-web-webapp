@@ -27,7 +27,7 @@ const Container = styled.svg`
 
 const CircleBackground = styled.path`
   fill: none;
-  stroke: #eee;
+  stroke: ${theme.colors.grey.grey10};
   stroke-width: 4;
 `;
 
