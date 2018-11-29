@@ -150,7 +150,7 @@ https://github.com/mars/create-react-app-buildpack.git
 * [React-Create-App](https://github.com/facebook/create-react-app) - React-CLI to kickstart your project
 
 ## Authors
-* **Raphaël Papillon** - *Initial work* - [PurpleBooth](https://github.com/raphpap)
+* **Raphaël Papillon** - *Initial work* - [raphpap](https://github.com/raphpap)
 
 ## License
 This project is licensed under the LGPL-3.0 License - see the [LICENSE.md](LICENSE.md) file for details
