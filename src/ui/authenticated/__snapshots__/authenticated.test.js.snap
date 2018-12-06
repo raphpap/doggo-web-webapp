@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Authenticated /> renders correctly when logged in 1`] = `
+<Container>
+  <withRouter(Header) />
+  <Content>
+    <Switch>
+      <Route
+        component={[Function]}
+        path="/capture"
+      />
+      <Route
+        path="/team/card/:cardId"
+        render={[Function]}
+      />
+      <Route
+        component={[Function]}
+        path="/team"
+      />
+      <Route
+        component={[Function]}
+        path="/battle"
+      />
+      <Route
+        component={[Function]}
+      />
+    </Switch>
+  </Content>
+</Container>
+`;

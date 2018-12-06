@@ -29,6 +29,7 @@
     "prettier": "prettier --single-quote --no-bracket-spacing --write './src/**/*.{js,ts,tsx,gql,graphql}'"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.10",
     "@types/jest": "^23.0.0",
     "@types/node": "^10.3.2",
     "@types/react": "^16.3.17",
@@ -37,6 +38,10 @@
     "@types/react-router-dom": "^4.2.7",
     "@types/recompose": "^0.26.1",
     "@types/react-webcam": "^0.3.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "jest-emotion": "^9.2.2",
     "prettier": "^1.13.5",
     "stylelint": "^8.4.0",
     "stylelint-config-mirego": "^1.0.0",
