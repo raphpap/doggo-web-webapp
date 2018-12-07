@@ -43,8 +43,8 @@ export class Team extends React.Component<EnhancedProps> {
     const {cardId} = this.props;
     const {cards} = this.props.context.state;
 
-    if (!cards) {
-      return <Message>Loading...</Message>;
+    if (!cards || cards.length === 0) {
+      return <Message>No cards to display</Message>;
     }
 
     const card = findCard(cardId || '', cards);
