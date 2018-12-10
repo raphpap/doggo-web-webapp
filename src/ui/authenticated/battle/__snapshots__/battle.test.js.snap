@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Battle /> renders correctly 1`] = `
+<Wrapper>
+  <Container>
+    <OpponentCard
+      onCardClick={[Function]}
+      opponentCard={
+        Object {
+          "attack": 99,
+          "defense": 99,
+          "hpLeft": 99,
+          "hpTotal": 99,
+          "id": "99",
+          "image": "99",
+          "name": "99",
+        }
+      }
+    />
+    <NextBattleAction
+      battleStatus="no-card-selected"
+      onBattleClicked={[Function]}
+      onNextAfterLost={[Function]}
+      onNextAfterWin={[Function]}
+      ownCard={null}
+    />
+    <OwnCard
+      onCardClick={[Function]}
+      onCardSelectionClick={[Function]}
+      ownCard={null}
+    />
+  </Container>
+  <CardSelectionModal
+    cards={
+      Array [
+        Object {
+          "attack": 11,
+          "defense": 11,
+          "hpLeft": 11,
+          "hpTotal": 11,
+          "id": "11",
+          "image": "11",
+          "name": "11",
+        },
+        Object {
+          "attack": 12,
+          "defense": 12,
+          "hpLeft": 12,
+          "hpTotal": 12,
+          "id": "12",
+          "image": "12",
+          "name": "12",
+        },
+      ]
+    }
+    isOpen={false}
+    onCardSelect={[Function]}
+    onClose={[Function]}
+  />
+  <BigCardModal
+    card={null}
+    onClose={[Function]}
+  />
+</Wrapper>
+`;

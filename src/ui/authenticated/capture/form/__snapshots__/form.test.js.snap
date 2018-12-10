@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Login /> renders correctly 1`] = `
+exports[`<Form /> renders correctly 1`] = `
 <form
   onSubmit={[Function]}
 >

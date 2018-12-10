@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NextBattleAction /> renders correctly when lost battle 1`] = `
+<ActionContainer>
+  <div>
+    <Logo
+      height="110px"
+      logo="lost-logo.png"
+      marginUnits={0.1}
+    />
+    <ContinueButton
+      onClick={[MockFunction]}
+    >
+      Press to continue &gt;&gt;
+    </ContinueButton>
+  </div>
+</ActionContainer>
+`;
+
+exports[`<NextBattleAction /> renders correctly when no card selected 1`] = `
+<ActionContainer>
+  <Message>
+    Get ready to battle
+  </Message>
+</ActionContainer>
+`;
+
+exports[`<NextBattleAction /> renders correctly when no opponent 1`] = `
+<ActionContainer>
+  <Message>
+    Loading...
+  </Message>
+</ActionContainer>
+`;
+
+exports[`<NextBattleAction /> renders correctly when ongoing battle 1`] = `
+<ActionContainer>
+  <BattleAnimation />
+</ActionContainer>
+`;
+
+exports[`<NextBattleAction /> renders correctly when ready to battle 1`] = `
+<ActionContainer>
+  <PrettyButton
+    logo="battle-logo.png"
+    onClick={[Function]}
+  />
+</ActionContainer>
+`;
+
+exports[`<NextBattleAction /> renders correctly when won battle 1`] = `
+<ActionContainer>
+  <div>
+    <Logo
+      height="110px"
+      logo="won-logo.png"
+      marginUnits={0.1}
+    />
+    <ContinueButton
+      onClick={[MockFunction]}
+    >
+      Press to continue &gt;&gt;
+    </ContinueButton>
+  </div>
+</ActionContainer>
+`;

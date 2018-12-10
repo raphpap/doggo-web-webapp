@@ -13,7 +13,7 @@ import TextField from './text-field';
 // Mocks
 import {mockContextWithoutData, mockLoggedIn} from 'doggo/test-mocks';
 
-describe('<Login />', () => {
+describe('<Form />', () => {
   let wrapper;
   let context;
   let imageSrc = "image_src";
