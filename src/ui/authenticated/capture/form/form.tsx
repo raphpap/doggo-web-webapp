@@ -23,7 +23,7 @@ interface State {
   isDirty: boolean;
 }
 
-const cardNameHasError = (cardName: string) => cardName === '';
+const cardNameHasError = (cardName: string) => cardName.trim() === '';
 
 export class Form extends React.Component<Props, State> {
   public readonly state: State = {
