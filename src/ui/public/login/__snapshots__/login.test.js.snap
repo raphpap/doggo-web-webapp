@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> renders correctly when not logged in 1`] = `
+<Fragment>
+  <Logo
+    height="180px"
+    logo="doggo-logo.png"
+    marginUnits={5}
+  />
+  <Form
+    onSubmit={[Function]}
+  >
+    <TextField
+      error={false}
+      id="username"
+      onChange={[Function]}
+      placeholder="Username"
+      type="text"
+      value=""
+    />
+    <TextField
+      error={false}
+      id="password"
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+      value=""
+    />
+    <Button
+      type="submit"
+    >
+      Login
+    </Button>
+  </Form>
+</Fragment>
+`;

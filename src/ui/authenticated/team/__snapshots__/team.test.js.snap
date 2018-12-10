@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Team /> renders a message when no cards to show 1`] = `
+<Message>
+  No cards to display
+</Message>
+`;

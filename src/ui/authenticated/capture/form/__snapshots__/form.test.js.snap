@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form /> renders correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <TextField
+    error={false}
+    id="card-name"
+    onChange={[Function]}
+    placeholder="Card Name"
+    type="text"
+    value=""
+  />
+  <Image
+    src="image_src"
+  />
+  <ButtonRow>
+    <Button
+      onClick={[MockFunction]}
+    >
+      Cancel
+    </Button>
+    <Button
+      type="submit"
+    >
+      Confirm
+    </Button>
+  </ButtonRow>
+</form>
+`;

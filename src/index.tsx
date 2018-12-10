@@ -5,9 +5,6 @@ import ReactDOM from 'react-dom';
 // Components
 import Application from 'doggo/ui/application';
 
-// Vendor components
-import {BrowserRouter as Router} from 'react-router-dom';
-
 // Styles
 import 'simple-css-reset/reset.css';
 
@@ -18,9 +15,7 @@ import {ThemeContextProvider} from 'doggo/theme';
 ReactDOM.render(
   <ThemeContextProvider>
     <ApplicationContextProvider>
-      <Router>
-        <Application />
-      </Router>
+      <Application />
     </ApplicationContextProvider>
   </ThemeContextProvider>,
   document.getElementById('root')

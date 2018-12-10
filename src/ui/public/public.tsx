@@ -1,6 +1,5 @@
 // Vendor
 import React, {Component} from 'react';
-import {compose} from 'recompose';
 
 // Vendor components
 import {Route, Switch} from 'react-router-dom';
@@ -12,20 +11,11 @@ import Content from 'doggo/ui/@components/content';
 // Components
 import Login from './login';
 
-// Context
-import {
-  withApplicationContext,
-  WithApplicationContextProps
-} from 'doggo/context';
-
 // Types
 interface Props {}
-type EnhancedProps = Props & WithApplicationContextProps;
-
-const enhance = compose<EnhancedProps, Props>(withApplicationContext);
 
 // Interfaces
-export class Public extends Component<EnhancedProps> {
+export class Public extends Component<Props> {
   public render() {
     return (
       <Container>
@@ -40,4 +30,4 @@ export class Public extends Component<EnhancedProps> {
   }
 }
 
-export default enhance(Public);
+export default Public;
