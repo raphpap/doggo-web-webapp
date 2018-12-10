@@ -6,15 +6,26 @@ import {Provider} from './context';
 
 // Services
 import DoggoAPI, {
-  ApiError,
-  BattleResultData,
-  CaptureResultData,
-  LoginResultData,
-  NextOpponentResultData
+  // ApiError,
+  // BattleResultData,
+  // CaptureResultData,
+  // LoginResultData,
+  // NextOpponentResultData
 } from 'doggo/services/doggo-api';
 
 // Types
-import {BattleStatus, Card, ContextState} from './types';
+import {BattleActions, BattleCardActions, CaptureActions, GetNextOpponentActions, LoginActions} from './actions';
+import {battleReducer, cardsReducer, errorReducer, loadingReducer} from './reducers';
+import {
+  Action,
+  BattlePayload,
+  BattleStatus,
+  CapturePayload,
+  Card,
+  ContextState,
+  GetNextOpponentPayload,
+  LoginPayload
+} from './types';
 
 type State = Readonly<ContextState>;
 
@@ -28,113 +39,6 @@ const INITIAL_STATE: State = {
   cards: null,
   error: null,
   loading: false
-};
-
-const handleCallPending = () => ({
-  error: null,
-  loading: true
-});
-
-const handleCallFailure = (error: ApiError) => ({
-  error,
-  loading: false
-});
-
-const handleLoginSuccess = ({cards, opponent, username}: LoginResultData) => (
-  state: ContextState
-) => {
-  return {
-    ...state,
-    battle: {
-      cardId: null,
-      opponent,
-      status: BattleStatus.NoCardSelected
-    },
-    cards,
-    loading: false,
-    username
-  };
-};
-
-const handleCaptureSuccess = ({card}: CaptureResultData) => (
-  state: ContextState
-) => {
-  if (!state.cards) {
-    throw Error(`Team was not found! Cannot capture a new doggo for now.`);
-  }
-
-  return {
-    ...state,
-    cards: state.cards.concat([card]),
-    loading: false
-  };
-};
-
-const handleBeginBattle = () => (state: ContextState) => {
-  return {
-    ...state,
-    ...handleCallPending(),
-    battle: {
-      ...state.battle,
-      status: BattleStatus.Ongoing
-    }
-  };
-};
-
-const handleSelectCard = (card: Card) => (state: ContextState) => {
-  return {
-    ...state,
-    battle: {
-      ...state.battle,
-      cardId: card.id,
-      status: BattleStatus.Ready
-    }
-  };
-};
-
-const handleUnselectCard = () => (state: ContextState) => {
-  return {
-    ...state,
-    battle: {
-      ...state.battle,
-      cardId: null,
-      status: BattleStatus.NoCardSelected
-    }
-  };
-};
-
-const handleGetNextOpponentSuccess = ({opponent}: NextOpponentResultData) => (
-  state: ContextState
-) => {
-  return {
-    ...state,
-    battle: {
-      ...state.battle,
-      opponent,
-      status: BattleStatus.Ready
-    }
-  };
-};
-
-const handleBattleSuccess = ({card, opponent}: BattleResultData) => (
-  state: ContextState
-) => {
-  if (!state.cards) {
-    throw Error(`Team was not found! Cannot battle for now.`);
-  }
-
-  return {
-    ...state,
-    battle: {
-      ...state.battle,
-      opponent,
-      status: opponent.hpLeft === 0 ? BattleStatus.Won : BattleStatus.Lost
-    },
-    cards: state.cards.map(mappedCard =>
-      mappedCard.id === card.id ? card : mappedCard
-    ),
-    loading: false
-  };
 };
 
 export class ApplicationContextProvider extends React.Component<{}, State> {
@@ -160,59 +64,101 @@ export class ApplicationContextProvider extends React.Component<{}, State> {
     );
   }
 
-  private battle = async (ownCard: Card, opponentCard: Card) => {
-    this.setState(handleBeginBattle());
-
-    const {data, error} = await DoggoAPI.battle(ownCard, opponentCard);
-
-    if (error) {
-      this.setState(handleCallFailure(error));
-    } else {
-      this.setState(handleBattleSuccess(data!));
-    }
+  private dispatch = async (action: Action) => {
+    this.rootSaga(action);
+    this.rootReducer(action);
   };
 
-  private capture = async (name: string, image: string) => {
-    this.setState(handleCallPending());
+  private rootSaga = async (action: Action) => {
+    const {type, payload} = action;
 
-    const {data, error} = await DoggoAPI.capture(name, image);
-
-    if (error) {
-      this.setState(handleCallFailure(error));
-    } else {
-      this.setState(handleCaptureSuccess(data!));
+    switch (type) {
+      case LoginActions.Action:
+        return this.loginSaga(payload);
+      case CaptureActions.Action:
+        return this.captureSaga(payload);
+      case BattleActions.Action:
+        return this.battleSaga(payload);
+      case GetNextOpponentActions.Action:
+        return this.getNextOpponentSaga(payload);
+      default:
+        return;
     }
+  }
+
+  private rootReducer = async (action: Action) => {
+    this.setState(state => ({
+      ...state,
+      battle: battleReducer(state.battle, action),
+      cards: cardsReducer(state.cards, action),
+      error: errorReducer(state.error, action),
+      loading: loadingReducer(state.loading, action)
+    }));
   };
 
-  private login = async (username: string, password: string) => {
-    this.setState(handleCallPending());
-
-    const {data, error} = await DoggoAPI.login(username, password);
-
-    if (error) {
-      this.setState(handleCallFailure(error));
-    } else {
-      this.setState(handleLoginSuccess(data!));
-    }
+  // Action Dispatchers
+  private battle = async (payload: BattlePayload) => {
+    this.dispatch({type: BattleActions.Action, payload});
   };
 
-  private selectBattleCard = async (card: Card) => {
-    this.setState(handleSelectCard(card));
+  private capture = async (payload: CapturePayload) => {
+    this.dispatch({type: CaptureActions.Action, payload});
+  };
+
+  private login = async (payload: LoginPayload) => {
+    this.dispatch({type: LoginActions.Action, payload});
+  };
+
+  private selectBattleCard = async (payload: Card) => {
+    this.dispatch({type: BattleCardActions.Select, payload});
   };
 
   private unselectBattleCard = async () => {
-    this.setState(handleUnselectCard());
+    this.dispatch({type: BattleCardActions.Unselect, payload: null});
   };
 
-  private getNextOpponent = async (opponentCard: Card) => {
-    this.setState(handleCallPending());
+  private getNextOpponent = async (payload: GetNextOpponentPayload) => {
+    this.dispatch({type: GetNextOpponentActions.Action, payload});
+  };
 
-    const {data, error} = await DoggoAPI.nextOpponent(opponentCard);
+  // Sagas
+  private loginSaga = async ({username, password}: LoginPayload) => {
+    const {data, error} = await DoggoAPI.login(username, password);
 
     if (error) {
-      this.setState(handleCallFailure(error));
+      this.dispatch({type: LoginActions.Error, payload: error});
     } else {
-      this.setState(handleGetNextOpponentSuccess(data!));
+      this.dispatch({type: LoginActions.Success, payload: data!});
+    }
+  };
+
+  private captureSaga = async ({name, image}: CapturePayload) => {
+    const {data, error} = await DoggoAPI.capture(name, image);
+
+    if (error) {
+      this.dispatch({type: CaptureActions.Error, payload: error});
+    } else {
+      this.dispatch({type: CaptureActions.Success, payload: data!});
+    }
+  };
+
+  private battleSaga = async ({ownCard, opponentCard}: BattlePayload) => {
+    const {data, error} = await DoggoAPI.battle(ownCard, opponentCard);
+
+    if (error) {
+      this.dispatch({type: BattleActions.Error, payload: error});
+    } else {
+      this.dispatch({type: BattleActions.Success, payload: data!});
+    }
+  };
+
+  private getNextOpponentSaga = async ({card}: GetNextOpponentPayload) => {
+    const {data, error} = await DoggoAPI.nextOpponent(card);
+
+    if (error) {
+      this.dispatch({type: GetNextOpponentActions.Error, payload: error});
+    } else {
+      this.dispatch({type: GetNextOpponentActions.Success, payload: data!});
     }
   };
 }

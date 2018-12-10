@@ -108,7 +108,7 @@ export class Login extends React.Component<EnhancedProps, State> {
     const {login} = this.props.context.actions;
     const {username, password} = this.state;
 
-    login(username, password);
+    login({username, password});
     this.setState({isDirty: false});
   };
 }

@@ -1,4 +1,29 @@
 import {ApiError} from 'doggo/services/doggo-api';
+import {ActionType} from './actions';
+
+export interface Action {
+  type: ActionType,
+  payload: any
+};
+
+export interface LoginPayload {
+  username: string;
+  password: string;
+}
+
+export interface CapturePayload {
+  name: string;
+  image: string;
+}
+
+export interface BattlePayload {
+  ownCard: Card;
+  opponentCard: Card;
+}
+
+export interface GetNextOpponentPayload {
+  card: Card;
+}
 
 export interface ApplicationContext {
   actions: ContextActions;
@@ -6,10 +31,10 @@ export interface ApplicationContext {
 }
 
 export interface ContextActions {
-  battle: (ownCard: Card, opponentCard: Card) => void;
-  capture: (name: string, image: string) => void;
-  getNextOpponent: (opponentCard: Card) => void;
-  login: (username: string, password: string) => void;
+  battle: (payload: BattlePayload) => void;
+  capture: (payload: CapturePayload) => void;
+  getNextOpponent: (payload: GetNextOpponentPayload) => void;
+  login: (payload: LoginPayload) => void;
   selectBattleCard: (card: Card) => void;
   unselectBattleCard: () => void;
 }
