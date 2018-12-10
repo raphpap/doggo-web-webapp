@@ -17,7 +17,7 @@ interface CardProps {
   isClickable: boolean;
 }
 
-const CardContainer = styled.li`
+export const CardContainer = styled.li`
   display: flex;
   opacity: ${({isDefeated}: CardProps) => (isDefeated ? 0.5 : 1)};
   justify-content: space-between;

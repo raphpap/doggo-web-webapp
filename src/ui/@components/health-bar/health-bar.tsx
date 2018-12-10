@@ -35,7 +35,7 @@ const HealthBox = styled.div`
   background-color: #ccc;
 `;
 
-const HealthBarColor = styled.div`
+export const HealthBarColor = styled.div`
   position: absolute;
   width: ${({healthPercentage}: HealthBarColorProps) =>
     getHealthBarWidth(healthPercentage)};

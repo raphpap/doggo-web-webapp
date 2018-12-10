@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Capture /> renders correctly 1`] = `
+<Fragment>
+  <Message>
+    Find a Doggo and press Capture to make him part of your team!
+  </Message>
+  <div>
+    <WebcamContainer>
+      <Webcam
+        audio={false}
+        className=""
+        height={520}
+        onUserMedia={[Function]}
+        onUserMediaError={[Function]}
+        screenshotFormat="image/webp"
+        screenshotQuality={0.92}
+        width={680}
+      />
+    </WebcamContainer>
+    <HiddenWebcamContainer>
+      <Webcam
+        audio={false}
+        className=""
+        height={520}
+        onUserMedia={[Function]}
+        onUserMediaError={[Function]}
+        screenshotFormat="image/webp"
+        screenshotQuality={0.92}
+        width={680}
+      />
+    </HiddenWebcamContainer>
+  </div>
+  <ModalComponent
+    isOpen={false}
+    onClose={[Function]}
+  />
+</Fragment>
+`;

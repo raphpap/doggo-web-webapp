@@ -21,10 +21,10 @@ export const mockBattle: (
   }
 
   if (opponentHpLeft > ownHpLeft) {
-    opponentHpLeft = opponentHpLeft < 0 ? 10 : opponentHpLeft;
+    opponentHpLeft = opponentHpLeft <= 0 ? 10 : opponentHpLeft;
     ownHpLeft = 0;
   } else {
-    ownHpLeft = ownHpLeft < 0 ? 10 : ownHpLeft;
+    ownHpLeft = ownHpLeft <= 0 ? 10 : ownHpLeft;
     opponentHpLeft = 0;
   }
 

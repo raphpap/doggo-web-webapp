@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SmallCard /> renders correctly 1`] = `
+<CardContainer
+  isClickable={true}
+  isDefeated={false}
+  onClick={[Function]}
+>
+  <Image
+    src="image.jpg"
+  />
+  <Info>
+    <Name>
+      card_name
+    </Name>
+    <HealthBar
+      hpLeft={30}
+      hpTotal={40}
+    />
+    <Stats>
+      <div>
+        Atk: 
+        10
+      </div>
+      <div>
+        Def: 
+        20
+      </div>
+    </Stats>
+  </Info>
+</CardContainer>
+`;
