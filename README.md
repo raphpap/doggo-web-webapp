@@ -5,6 +5,7 @@ DogGO is an online application that allows you to capture (and make friends with
 # Demo
 
 Available test usernames are `alfa` and `bravo`. No passwords needed for those.
+
 https://doggo-web-webapp.herokuapp.com
 
 ## Motivation
