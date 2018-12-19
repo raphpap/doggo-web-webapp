@@ -3,6 +3,8 @@
 DogGO is an online application that allows you to capture (and make friends with) your very own team of kickass Doggos and conquer the world together.
 
 # Demo
+
+Available test usernames are `alfa` and `bravo`. No passwords needed for those.
 https://doggo-web-webapp.herokuapp.com
 
 ## Motivation
