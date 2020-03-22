@@ -8,6 +8,10 @@ Available test usernames are `alfa` and `bravo`. No passwords needed for those.
 
 https://doggo-web-webapp.herokuapp.com
 
+## Upcoming feature(s)
+
+In the [tensorflow-detection](https://github.com/raphpap/doggo-web-webapp/tree/feature/tensorflow-detection) is an upcoming feature where an AI model has been trained to detect the presence of a dog-like shape in the capture screen. This would allow the app to only permit users to capture dogs.
+
 ## Motivation
 There is two main goals in the realization of this project:
 
